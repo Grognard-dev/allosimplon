@@ -42,15 +42,24 @@
             </a>
             <a href="" class="versfilm">
             <div class="cardaxel">
-                <img class="poster-img" src="./img/poster4.jpg" alt="">
-                <div class="titrefilm">Dark Waters</div>
-                <div class="infoaxel">
-                    <div class="textaxel">
-                        <p>3.9/5</p> 
-                        <p>2h08</p> 
-                        <p>Biopic,Drame</p>   
-                    </div>
-                </div>
+            
+            <?php  $config = require "config.php";
+
+$dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
+             $reponse = $database->query('SELECT Affiche FROM Film');
+while ($donnees = $reponse->fetch())
+{
+ 
+?>
+ 
+<img class="poster-img" src="<?php echo $donnees['Affiche']; ?>">
+ 
+<?php
+ 
+} 
+ 
+?>
+
             </div>
             </a>
 
