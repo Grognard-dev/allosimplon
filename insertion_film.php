@@ -1,4 +1,5 @@
 <?php
+session_start();
 ini_set("display_errors","1");
 error_reporting(E_ALL);
 
@@ -9,18 +10,16 @@ $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
      if (isset($_POST['bouton'])){
         $Nom_du_film = empty($_POST['Nom_du_film']) ? null : $_POST['Nom_du_film'];
         $Date_de_sortie = empty($_POST['Date_de_sortie']) ? null : $_POST['Date_de_sortie'];
-        $Resumer_du_film= empty($_POST['Resumer_du_film']) ? null : $_POST['Resumer_du_film'];
         $synopsis = empty($_POST['synopsis']) ? null : $_POST['synopsis'];
 
-        if ($Nom_du_film === null || $Date_de_sortie === null  || $Resumer_du_film === null || $synopsis === null) {
+        if ($Nom_du_film === null || $Date_de_sortie === null  || $synopsis === null) {
             $erreur = 'Veuillez remplir tous les champs';
         }else {
-            $insertion_film = $dbh->prepare ("INSERT INTO Film (Nom_du_film, Date_de_sortie, Resumer_du_film, synopsis) 
-            VALUES (:Nom_du_film, :Date_de_sortie, :Resumer_du_film, :synopsis)") ;
+            $insertion_film = $dbh->prepare ("INSERT INTO Film (Nom_du_film, Date_de_sortie, synopsis) 
+            VALUES (:Nom_du_film, :Date_de_sortie, :synopsis)") ;
             
             $insertion_film->bindValue(':Nom_du_film', $Nom_du_film);
             $insertion_film->bindValue(':Date_de_sortie', $Date_de_sortie);
-            $insertion_film->bindValue(':Resumer_du_film', $Resumer_du_film);
             $insertion_film->bindValue(':synopsis', $synopsis);
             $insertion_film->execute();
         }
@@ -52,17 +51,14 @@ if (isset($_FILES['Affiche']))
 <form action="insertion_film.php" method="POST" enctype="multipart/form-data">
 <h2>Film insertion</h2>
 
-<label><b>Nom du film</b></label>
+<label><b>Nom du film</b></label><br>
 <input class="login" type="text" placeholder="Nom du film" name="Nom_du_film" required> <br>
 
-<label><b>Date de sortie</b></label>
+<label><b>Date de sortie</b></label><br>
 <input class="login" type="text" placeholder="Date de sortie" name="Date_de_sortie" required> <br>
 
-<label><b>Resumer du film</b></label>
-<input class="login" type="text-area" placeholder="Resumer du film" name="Resumer_du_film" required> <br>
-
-<label><b>synopsis</b></label>
-<input class="login" type="text-area" placeholder="synopsis" name="synopsis" required> <br>
+<label><b>synopsis</b></label><br>
+<textarea rows="6" cols="100" name="synopsis" required></textarea> <br>
 
 <label><b>Affiche</b></label>
 <input type="hidden" name="size" value="250000" />

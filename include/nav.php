@@ -86,12 +86,13 @@
                 <li><a href="contact.php">Contact</a></li>
                 <li><a href="catalogue.php">Films</a></li>
                 <?php if(isset($_SESSION["Pseudo"])): ?>
-                        <li><span><?php echo $_SESSION["Pseudo"];?></span>
+                        <li><span>Bonjour <?php echo $_SESSION["Pseudo"];?></span>
                         <br>
                         <a href="logout.php">déconnexion</a>
                         </li>
-                        <li><a href="insertion.php">Insertion film</a></li>
-                        
+                        <?php if(isset($_SESSION["is_admin"]) && $_SESSION["is_admin"]):?>
+                        <li><a href="admin.php">Admin</a></li>
+                        <?php endif?>
                 <?php else:?>
                         <li><a href="inscription.php">Crée un compte</a></li>
                         <li><a href="connexion.php">Connexion</a></li>

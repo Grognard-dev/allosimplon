@@ -6,38 +6,38 @@ $config = require "config.php";
 
 $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
 
-$liste = $dbh->prepare("SELECT * FROM Film");
+$liste = $dbh->prepare("SELECT * FROM Acteur");
 $liste->execute();
-$films = $liste->fetchAll();
+$acteurs = $liste->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Films</title>
+    <title>Acteur</title>
 </head>
 <body>
-    <h1>Films</h1>
+    <h1>Acteurs</h1>
     <table>
         <tr>
             <th>
                 ID
             </th>
             <th>
-                Titre du Film
+                Nom
             </th>
         </tr>
-<?php foreach($films as $film):?>
+<?php foreach($acteurs as $acteur):?>
 <tr>
-    <td><?= $film['ID']?></td>
-    <td><?= $film['Nom_du_film']?></td>
-    <td><a href="editer_film.php?ID=<?=$film['ID']?>">modifier</a></td>
+    <td><?= $acteur['ID']?></td>
+    <td><?= $acteur['Nom']?></td>
+    <td><a href="editer_acteur.php?ID=<?=$acteur['ID']?>">modifier</a></td>
 </tr>
 
 <?php endforeach ?>
 
     </table>
-    <a href="insertion_film.php">Ajouter un film</a>
+    <a href="insertion_acteur.php">Ajouter un Acteur</a>
 </body>
 </html>

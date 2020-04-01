@@ -31,7 +31,11 @@ if (isset($_POST['bouton'])){
             session_regenerate_id();
             $_SESSION["ID"] = $utilisateur["ID"];
             $_SESSION["Pseudo"] = $utilisateur["Pseudo"];
-            $_SESSION['is_admin'] = $utilisateur["Admin"];
+            if($utilisateur["Admin"] === "1"){
+                $_SESSION['is_admin'] = true;
+            }else{
+                $_SESSION['is_admin'] = false;
+            }
             header('Location: /allosimplon/index.php');
             exit();
         }else{

@@ -8,12 +8,12 @@ error_reporting(E_ALL);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Producteur</title>
 </head>
 <body>
     
-    <form action="insertion_acteur.php" method="POST" enctype="multipart/form-data">
-        <label><b>Nom du film</b></label><br>
+    <form action="insertion_producteur.php" method="POST" enctype="multipart/form-data">
+        <label><b>Nom du Producteur</b></label><br>
         <input type="text"   name="Nom">
         <br>
         <label><b>Date_de_naissance</b></label><br>
@@ -32,7 +32,7 @@ error_reporting(E_ALL);
 </div>
     </form>
     
-    <a href="liste_acteur.php">Liste des Acteurs</a>
+    <a href="liste_producteur.php">Liste des Producteurs</a>
 </body>
 </html>
 
@@ -50,7 +50,7 @@ if (isset($_POST['bouton'])){
     if ($Nom === null || $Date_de_naissance === null  || $Pays_d_origine === null || $biographie === null) {
         $erreur = 'Veuillez remplir tous les champs';
     }else {
-        $insertion_film = $dbh->prepare ("INSERT INTO Acteur (Nom, Date_de_naissance, Pays_d_origine, biographie) 
+        $insertion_film = $dbh->prepare ("INSERT INTO Producteur (Nom, Date_de_naissance, Pays_d_origine, biographie) 
         VALUES (:Nom, :Date_de_naissance, :Pays_d_origine, :biographie)") ;
         
         $insertion_film->bindValue(':Nom', $Nom);
@@ -66,8 +66,8 @@ if (isset($_FILES['photo']))
 {  
     if ($_FILES['photo']['size'] <= 250000)
     {  
-        move_uploaded_file($_FILES['photo']['tmp_name'], 'photoacteur/' . $_FILES['photo']['name']);
-        $requete = $dbh->prepare("UPDATE Acteur SET photo = :photo WHERE ID = :ID ");
+        move_uploaded_file($_FILES['photo']['tmp_name'], 'photoproducteur/' . $_FILES['photo']['name']);
+        $requete = $dbh->prepare("UPDATE Producteur SET photo = :photo WHERE ID = :ID ");
         $requete->bindValue(':ID', $ID);
         $requete->bindValue(':photo', $_FILES['photo']['name']);
         

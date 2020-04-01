@@ -1,4 +1,5 @@
 <?php
+session_start();
 header('Content-type: text/html; charset=utf-8');
 require_once 'styleswitcher.php';
 ?>
@@ -45,7 +46,7 @@ require_once 'styleswitcher.php';
     <?php
     include 'include/nav.php';
     include 'include/filtres.php';
-    include 'include/films.php';
+    include 'films.php';
     include 'include/paracata.php';
     include 'include/footer.php';
     ?>

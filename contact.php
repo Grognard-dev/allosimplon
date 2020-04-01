@@ -1,5 +1,8 @@
 <?php
-
+session_start();
+function e($string, $flags=ENT_QUOTES){
+    return htmlspecialchars ($string,$flags);
+}
 if (isset($_POST['bouton'])){
     
     $nom = empty($_POST['nom_user']) ? null : $_POST['nom_user'];
@@ -72,16 +75,16 @@ require_once 'styleswitcher.php';
 
             
             <label><b>Nom d'utilisateur</b></label>
-            <input class="login" type="text" placeholder="Nom d'utilisateur" name="nom_user" required> <br>
+            <input class="login" type="text" value="Nom d'utilisateur" name="nom_user" required> <br>
 
             <label><b>Prenom d'utilisateur</b></label>
-            <input class="login" type="text" placeholder="Prenom d'utilisateur" name="prenom_user" required> <br>
+            <input class="login" type="text" value="Prenom d'utilisateur" name="prenom_user" required> <br>
 
             <label><b>Email d'utilisateur</b></label>
-            <input class="login" type="email" placeholder="Mail d'utilisateur" name="email_user" required> <br>
+            <input class="login" type="email" value="Mail d'utilisateur" name="email_user" required> <br>
 
             <label><b>Message</b></label>
-            <input class="login"  type="text-area" placeholder="Message" name="user_message" required><br>
+            <textarea rows="6" cols="100" name="user_message" required></textarea><br>
 
              <div class="bouton">
                 <button type="submit" name="bouton" class="btn btn-primary mb-2">Envoyer</button>
