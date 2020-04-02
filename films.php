@@ -18,7 +18,6 @@ $films = $liste->fetchAll();
 <title>Films</title>
 </head>
 <body>
-    toto<?php var_dump($_SESSION["is_admin"])?>toto
 <?php foreach($films as $film):?>
     <div>
      <p><?= $film['Nom_du_film']?></p>

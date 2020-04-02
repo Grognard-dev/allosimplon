@@ -11,6 +11,15 @@ $liste = $dbh->prepare("SELECT * FROM Film WHERE ID = :ID");
 $liste->bindValue(':ID', $_GET['ID']);
 $liste->execute();
 $films = $liste->fetch();
+$requete_genres = $dbh->prepare("
+SELECT *
+FROM Genre
+INNER JOIN relation7 ON relation7.ID_Genre = Genre.ID
+WHERE ID_film = :ID
+");
+$requete_genres->bindValue(':ID',$_GET['ID']);
+$requete_genres->execute();
+$genres_film = $requete_genres->fetchAll();
 
 $requete_acteurs = $dbh->prepare("
     SELECT *
@@ -20,9 +29,26 @@ $requete_acteurs = $dbh->prepare("
 ");
 $requete_acteurs->bindValue(':ID',$_GET['ID']);
 $requete_acteurs->execute();
-$acteurs = $requete_acteurs->fetchAll();
+$acteurs_film = $requete_acteurs->fetchAll();
+$requete_realisateurs = $dbh->prepare("
+    SELECT *
+    FROM Realisateur
+    INNER JOIN realise ON realise.ID_realisateur = Realisateur.ID
+    WHERE ID_film = :ID
+");
+$requete_realisateurs->bindValue(':ID',$_GET['ID']);
+$requete_realisateurs->execute();
+$realisateurs_film = $requete_realisateurs->fetchAll();
+$requete_producteurs = $dbh->prepare("
+    SELECT *
+    FROM Producteur
+    INNER JOIN produit ON produit.ID_Producteur = Producteur.ID
+    WHERE ID_film = :ID
+");
+$requete_producteurs->bindValue(':ID',$_GET['ID']);
+$requete_producteurs->execute();
+$producteurs_film = $requete_producteurs->fetchAll();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,8 +69,17 @@ $acteurs = $requete_acteurs->fetchAll();
     <div>
         <p><?=$films['synopsis']?></p>
     </div>
+     <div>
+        <?php foreach($genres_film as $genre):?>
+        <ul>
+            <li>
+            <?=$genre['genre']?>
+            </li>
+        </ul>
+        <?php endforeach ?>
+    </div>
     <div>
-        <?php foreach($acteurs as $acteur):?>
+        <?php foreach($acteurs_film as $acteur):?>
         <ul>
             <li><img src="photoacteur/<?=$acteur['photo']?>" alt="">
             <?=$acteur['Nom']?>
@@ -52,6 +87,25 @@ $acteurs = $requete_acteurs->fetchAll();
         </ul>
         <?php endforeach ?>
     </div>
+     <div>
+        <?php foreach($realisateurs_film as $realisateur):?>
+        <ul>
+            <li><img src="photorealisateur/<?=$realisateur['photo']?>" alt="">
+            <?=$realisateur['Nom']?>
+            </li>
+        </ul>
+        <?php endforeach ?>
+    </div>
+     <div>
+        <?php foreach($producteurs_film as $producteur):?>
+        <ul>
+            <li><img src="photoproducteur/<?=$producteur['photo']?>" alt="">
+            <?=$producteur['Nom']?>
+            </li>
+        </ul>
+        <?php endforeach ?>
+    </div>
+   
   
     <a href="catalogue.php">Retourner a la Gallerie</a>
 </body>

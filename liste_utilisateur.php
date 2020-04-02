@@ -7,15 +7,16 @@ $config = require "config.php";
 
 $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
 
-$liste = $dbh->prepare("SELECT * FROM Film");
+$liste = $dbh->prepare("SELECT * FROM utilisateur");
 $liste->execute();
-$films = $liste->fetchAll();
-if(isset($_POST['delete_film'])){
-    $delete=$dbh->prepare("DELETE FROM Film WHERE ID = :ID LIMIT 1");
-    $delete->bindValue(':ID',$_POST['delete_film']);
+$utilisateurs = $liste->fetchAll();
+
+if(isset($_POST['delete_user'])){
+    $delete=$dbh->prepare("DELETE FROM utilisateur WHERE ID = :ID LIMIT 1");
+    $delete->bindValue(':ID',$_POST['delete_user']);
     $delete->execute();
     $_SESSION['flash'] = "Suppression effectuée";
-        header('Location: liste_films.php?ID='.$_SESSION['ID']);
+        header('Location: liste_utilisateur.php?ID='.$_SESSION['ID']);
         die;
 }
 ?>
@@ -24,36 +25,34 @@ if(isset($_POST['delete_film'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Films</title>
+    <title>User</title>
 </head>
 <body>
-    <h1>Films</h1>
+    <h1>User</h1>
     <table>
         <tr>
             <th>
                 ID
             </th>
             <th>
-                Titre du Film
+                Nom
             </th>
         </tr>
-<?php foreach($films as $film):?>
+<?php foreach($utilisateurs as $utilisateur):?>
 <tr>
-    <td><?= $film['ID']?></td>
-    <td><?= $film['Nom_du_film']?></td>
-    <td><a href="editer_film.php?ID=<?=$film['ID']?>">modifier</a></td>
-</tr>
- <td>
+    <td><?= $utilisateur['ID']?></td>
+    <td><?= $utilisateur['Nom']?></td>
+    <td><a href="editer_utilisateur.php?ID=<?=$utilisateur['ID']?>">modifier</a></td>
+    <td>
      <form method="post">
-                <button type="submit" name="delete_film" value="<?= $film['ID']?>">Delete film</button>
+                <button type="submit" name="delete_user" value="<?= $utilisateur['ID']?>">Delete user</button>
             </form>
     </td>
+</tr>
 
 <?php endforeach ?>
 
     </table>
-    <a href="insertion_film.php">Ajouter un film</a>
-     <br>
     <a href="admin.php?ID=<?=$_SESSION['ID']?>"> Retour liste Admin</a>
 </body>
 </html>

@@ -89,6 +89,7 @@
                         <li><span>Bonjour <?php echo $_SESSION["Pseudo"];?></span>
                         <br>
                         <a href="logout.php">déconnexion</a>
+                        <a href="user_compte.php?ID=<?=$_SESSION["ID"]?>">compte</a>
                         </li>
                         <?php if(isset($_SESSION["is_admin"]) && $_SESSION["is_admin"]):?>
                         <li><a href="admin.php">Admin</a></li>
