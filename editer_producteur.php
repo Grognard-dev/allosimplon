@@ -1,5 +1,6 @@
 <?php
 session_start();
+require "securite.php";
 function e($string, $flags=ENT_QUOTES){
     return htmlspecialchars ($string,$flags);
 }

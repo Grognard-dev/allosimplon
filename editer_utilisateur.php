@@ -1,5 +1,6 @@
 <?php
 session_start();
+require "securite.php";
 function e($string, $flags=ENT_QUOTES){
     return htmlspecialchars ($string,$flags);
 }
@@ -40,7 +41,7 @@ if (isset($_POST['bouton'])){
             $modifier_utilisateur->bindValue(':Prenom', $Prenom);
             $modifier_utilisateur->bindValue(':Pseudo', $Pseudo);
             $modifier_utilisateur->bindValue(':Email', $Email);
-            $modifier_utilisateur->bindValue(':mot_de_passe', $motdepasse);
+            $modifier_utilisateur->bindValue(':mot_de_passe', password_hash($motdepasse, PASSWORD_DEFAULT ));
             $modifier_utilisateur->execute();
 
             $_SESSION['flash'] = "Modification effectuer";
@@ -77,7 +78,7 @@ if (isset($_POST['bouton'])){
 <input class="login" type="text" value="<?= e($utilisateurs['Pseudo']) ?>" name="Pseudo" required> <br>
 <label><b>Mot de passe</b></label>
 <br>
-<input class="login" type="password" value="<?= e($utilisateurs['mot_de_passe']) ?>" name="mot_de_passe" required> <br>
+<input class="login" type="password"  name="mot_de_passe" required> <br>
 
 <div class="bouton">
 <button type="submit" name="bouton" class="btn btn-primary mb-2">modifier</button>

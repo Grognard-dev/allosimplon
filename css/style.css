@@ -1,0 +1,16 @@
+html{
+    padding: 0;
+    margin: 0;
+}
+body{
+    padding: 0;
+    margin: 0;
+}
+.affiche a img{
+    width: 150px;
+}
+a{
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+}

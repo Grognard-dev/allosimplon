@@ -38,10 +38,6 @@ $compte = $comptes->fetch();
     <div>
         <p><?=$compte['Pseudo']?></p>
     </div>
-      <label><b>Mot de passe<b></label>
-    <div>
-        <p> <?=$compte['mot_de_passe']?></p>
-    </div>
     <td><a href="editer_utilisateur.php?ID=<?=$_SESSION["ID"]?>">modifier mes données</a></td>
     <a href="https://lefevre.simplon-charleville.fr/allosimplon?ID=<?=$_SESSION["ID"]?>">Retour a l'accueil</a>
 </body>

@@ -69,6 +69,7 @@ $producteurs_film = $requete_producteurs->fetchAll();
     <div>
         <p><?=$films['synopsis']?></p>
     </div>
+    <label><b>Genre<b></label>
      <div>
         <?php foreach($genres_film as $genre):?>
         <ul>
@@ -78,6 +79,8 @@ $producteurs_film = $requete_producteurs->fetchAll();
         </ul>
         <?php endforeach ?>
     </div>
+    <label><b>Acteurs<b></label>
+    <br>
     <div>
         <?php foreach($acteurs_film as $acteur):?>
         <ul>
@@ -87,6 +90,8 @@ $producteurs_film = $requete_producteurs->fetchAll();
         </ul>
         <?php endforeach ?>
     </div>
+    <label><b>Réalisateur<b></label>
+    <br>
      <div>
         <?php foreach($realisateurs_film as $realisateur):?>
         <ul>
@@ -96,6 +101,8 @@ $producteurs_film = $requete_producteurs->fetchAll();
         </ul>
         <?php endforeach ?>
     </div>
+    <label><b>Producteur<b></label>
+    <br>
      <div>
         <?php foreach($producteurs_film as $producteur):?>
         <ul>

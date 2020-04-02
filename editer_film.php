@@ -1,5 +1,6 @@
 <?php
 session_start();
+require "securite.php";
 function e($string, $flags=ENT_QUOTES){
     return htmlspecialchars ($string,$flags);
 }
@@ -76,14 +77,14 @@ if(isset($_POST['ajout_acteur'])){
 $requete_genres = $dbh->prepare("
 SELECT *
 FROM Genre
-INNER JOIN relation7 ON relation7.ID_Genre = Genre.ID
+INNER JOIN genre ON genre.ID_Genre = Genre.ID
 WHERE ID_film = :ID
 ");
 $requete_genres->bindValue(':ID',$_GET['ID']);
 $requete_genres->execute();
 $genres_film = $requete_genres->fetchAll();
 if(isset($_POST['ajout_genre'])){
-    $requete_ajout=$dbh->prepare("INSERT INTO relation7 (ID_Genre,ID_film) VALUES (:ID_Genre,:ID_film)");
+    $requete_ajout=$dbh->prepare("INSERT INTO genre (ID_Genre,ID_film) VALUES (:ID_Genre,:ID_film)");
     $requete_ajout->bindValue(':ID_Genre',$_POST['select_genre']);
     $requete_ajout->bindValue(':ID_film', $_GET['ID']);
     $requete_ajout->execute();
@@ -137,7 +138,7 @@ if(isset($_POST['delete'])){
         die;
 }
 if(isset($_POST['delete_genre'])){
-    $delete=$dbh->prepare("DELETE FROM relation7 WHERE ID_Genre = :ID AND ID_film = :ID_film LIMIT 1");
+    $delete=$dbh->prepare("DELETE FROM genre WHERE ID_Genre = :ID AND ID_film = :ID_film LIMIT 1");
     $delete->bindValue(':ID',$_POST['delete_genre']);
     $delete->bindValue(':ID_film',$_GET['ID']);
     $delete->execute();

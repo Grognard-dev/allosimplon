@@ -9,7 +9,7 @@ $config = require "config.php";
 $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
 $erreur = null;
  
-   
+  
 if (isset($_POST['bouton'])){
     $pseudo_user = empty($_POST['pseudo_user']) ? null : $_POST['pseudo_user'];
     $password_user = empty($_POST['password_user']) ? null : $_POST['password_user'];
@@ -21,10 +21,14 @@ if (isset($_POST['bouton'])){
         $requeteprepare->execute(array(':Pseudo' => $pseudo_user));
         $utilisateur = $requeteprepare->fetch(PDO::FETCH_ASSOC);
         if($utilisateur === false){
-         $erreur =  "login et / ou mot de passe incorrect";
+            $erreur =  "login et / ou mot de passe incorrect";
         }
         
-        if(password_verify($password_user, $utilisateur["mot_de_passe"])) {
+        if(!password_verify($password_user, $utilisateur["mot_de_passe"] ?? '')) {
+            $erreur =  "login et / ou mot de passe incorrect";
+        }
+
+        if( $erreur === null){
             if (session_status() === PHP_SESSION_NONE){
                 session_start();
             }
@@ -38,11 +42,10 @@ if (isset($_POST['bouton'])){
             }
             header('Location: /allosimplon/index.php');
             exit();
-        }else{
-            $erreur = "login et / ou mot de passe incorrect";
         }
     }
 }
+
 
 ?>
 <!DOCTYPE html>

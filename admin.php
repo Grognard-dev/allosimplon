@@ -1,4 +1,7 @@
-<?php session_start();?>
+<?php session_start();
+require "securite.php"
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

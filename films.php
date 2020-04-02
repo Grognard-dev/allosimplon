@@ -16,11 +16,11 @@ $films = $liste->fetchAll();
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Films</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <?php foreach($films as $film):?>
-    <div>
-     <p><?= $film['Nom_du_film']?></p>
+    <div class="affiche">
      <a href="fiche_film.php?ID=<?=$film['ID']?>"><img src="affiche/<?=$film["Affiche"]?>" alt=""></a>
      <?php
      if(isset($_SESSION["is_admin"]) && $_SESSION["is_admin"]):?>
