@@ -23,6 +23,7 @@ require "securite.php"
 <ul>
     <li><a href="liste_utilisateur.php?ID=<?=$_SESSION['ID']?>">liste des users</a></li>
 </ul>
+<a href="https://lefevre.simplon-charleville.fr/allosimplon/index.php?ID=<?=$_SESSION['ID']?>">Retourner a l'accueil</a>
 </body>
 </html>
 

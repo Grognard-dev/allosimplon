@@ -17,8 +17,10 @@ $films = $liste->fetchAll();
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Films</title>
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="index.css">
 </head>
 <body>
+    <div>
 <?php foreach($films as $film):?>
     <div class="affiche">
      <a href="fiche_film.php?ID=<?=$film['ID']?>"><img src="affiche/<?=$film["Affiche"]?>" alt=""></a>
@@ -29,8 +31,10 @@ $films = $liste->fetchAll();
     </div>
     <?php endforeach ?>
     <?php if(isset($_SESSION["is_admin"]) && $_SESSION["is_admin"]):?>
-    <a href="insertion_film.php">Ajouter un film</a>
+    <a class="ajouter_film" href="insertion_film.php">Ajouter un film</a>
     <?php endif ?>
+    </div>
+    
      </body>
     </html>
     

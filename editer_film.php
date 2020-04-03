@@ -170,28 +170,29 @@ if(isset($_POST['delete_producteur'])){
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>Editer film</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <form method="POST" enctype="multipart/form-data">
 <h1>Modification du Film</h1>
 
-<label><b>Nom du film</b></label>
-<input class="login" type="text" value="<?= e($film['Nom_du_film']) ?>" name="Nom_du_film" required> <br>
+<label class="form-titre"><b>Nom du film</b></label>
+<input class="form-champs" type="text" value="<?= e($film['Nom_du_film']) ?>" name="Nom_du_film" required> <br>
 
-<label><b>Date de sortie</b></label>
-<input class="login" type="text" value="<?= e($film['Date_de_sortie']) ?>" name="Date_de_sortie" required> <br>
+<label class="form-titre"><b>Date de sortie</b></label>
+<input class="form-champs" type="text" value="<?= e($film['Date_de_sortie']) ?>" name="Date_de_sortie" required> <br>
 
-<label><b>synopsis</b></label>
+<label class="form-titre"><b>synopsis</b></label>
 <br>
-<textarea rows="6" cols="100" class="login"  name="synopsis" required><?= e($film['synopsis'])?></textarea> <br>
+<textarea class="form-champs" rows="6" cols="100" class="login"  name="synopsis" required><?= e($film['synopsis'])?></textarea> <br>
 
 <label><b>Affiche</b></label>
 <br>
 <img src="affiche/<?= e($film['Affiche'])?>" alt="">
 <br>
-<input type="hidden" name="size" value="250000" />
-<input type="file" name="Affiche" size=2000 />
+<input class="form-champs" type="hidden" name="size" value="250000" />
+<input class="form-champs" type="file" name="Affiche" size=2000 />
 
 <div class="bouton">
 <button type="submit" name="bouton" class="btn btn-primary mb-2">modifier</button>
@@ -306,7 +307,7 @@ if(isset($_POST['delete_producteur'])){
             </li>
             </ul>
             <?php endforeach ?>
-           
+           <a href="https://lefevre.simplon-charleville.fr/allosimplon/catalogue.php?ID=<?=$_SESSION['ID']?>">Retour a la Gallerie</a>
             
             </body>
             </html>

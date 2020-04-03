@@ -14,7 +14,7 @@ $films = $liste->fetch();
 $requete_genres = $dbh->prepare("
 SELECT *
 FROM Genre
-INNER JOIN relation7 ON relation7.ID_Genre = Genre.ID
+INNER JOIN genre ON genre.ID_Genre = Genre.ID
 WHERE ID_film = :ID
 ");
 $requete_genres->bindValue(':ID',$_GET['ID']);

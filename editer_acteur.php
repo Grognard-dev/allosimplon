@@ -75,31 +75,34 @@ if (isset($_POST['bouton'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Editer Acteur</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <form method="POST" enctype="multipart/form-data">
 <h1>Modification de l'acteur</h1>
 
-<label><b>Nom de l'acteur</b></label>
-<input class="login" type="text" value="<?= e($acteurs['Nom']) ?>" name="Nom" required> <br>
+<label class="form-titre"><b>Nom de l'acteur</b></label>
+<input class="form-champs" type="text" value="<?= e($acteurs['Nom']) ?>" name="Nom" required> <br>
 
-<label><b>Date de naissance</b></label>
-<input class="login" type="text" value="<?= e($acteurs['Date_de_naissance']) ?>" name="Date_de_naissance" required> <br>
+<label class="form-titre"><b>Date de naissance</b></label>
+<input class="form-champs" type="text" value="<?= e($acteurs['Date_de_naissance']) ?>" name="Date_de_naissance" required> <br>
 
-<label><b>Pays_d_origine<b></label>
-<input class="login" type="text" value="<?= e($acteurs['Pays_d_origine']) ?>" name="Pays_d_origine" required> <br>
-
-<label><b>biographie</b></label>
+<label class="form-titre"><b>Pays_d_origine<b></label>
+<input class="form-champs" type="text" value="<?= e($acteurs['Pays_d_origine']) ?>" name="Pays_d_origine" required> <br>
+ 
+<label class="form-titre"><b>biographie</b></label>
 <br>
-<textarea rows="6" cols="100" class="login"  name="biographie" required><?= e($acteurs['biographie'])?></textarea> <br>
+<textarea class="form-champs" rows="6" cols="100" class="login"  name="biographie" required><?= e($acteurs['biographie'])?></textarea> <br>
 
-<label><b>Photo</b></label>
+<label  class="form-titre">><b>Photo</b></label>
 <br>
 <img src="photoacteur/<?= e($acteurs['photo'])?>" alt="">
 <br>
-<input type="hidden" name="size" value="250000" />
-<input type="file" name="photo" size=2000 />
+<input class="form-champs" type="hidden" name="size" value="250000" />
+<br>
+<input class="form-champs" type="file" name="photo" size=2000 />
+<br>
 
 
 <div class="bouton">
@@ -112,5 +115,6 @@ if (isset($_POST['bouton'])){
   <p><?=e($message)?></p>
 <?php endif?>
 </form>
+<a href="liste_acteur.php">Liste des Acteurs</a>
 </body>
 </html>

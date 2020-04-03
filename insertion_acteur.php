@@ -1,6 +1,9 @@
 <?php
 session_start();
 require "securite.php";
+function e($string, $flags=ENT_QUOTES){
+    return htmlspecialchars ($string,$flags);
+}
 ini_set("display_errors","1");
 error_reporting(E_ALL);
 ?>
@@ -9,31 +12,33 @@ error_reporting(E_ALL);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Création d'acteur</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     
-    <form action="insertion_acteur.php" method="POST" enctype="multipart/form-data">
-        <label><b>Nom du film</b></label><br>
-        <input type="text"   name="Nom">
+    <form class="form-insert" action="insertion_acteur.php" method="POST" enctype="multipart/form-data">
+    <h2>Film acteur</h2>
+    <label class="form-titre"><b>Nom de l'Acteur</b></label><br>
+        <input class="form-champs" type=<?=e("text")?>   name="Nom">
         <br>
-        <label><b>Date_de_naissance</b></label><br>
-        <input type="text"   name="Date_de_naissance">
+        <label class="form-titre"><b>Date de naissance</b></label><br>
+        <input class="form-champs" type=<?=e("text")?>   name="Date_de_naissance">
         <br>
-        <label><b>Pays_d_origine</b></label><br>
-        <input type="text"   name="Pays_d_origine">
+        <label class="form-titre"><b>Pays d'origine</b></label><br>
+        <input class="form-champs" type=<?=e("text")?>   name="Pays_d_origine">
         <br>
-        <label><b>biographie</b></label><br>
-        <textarea rows="6" cols="100" name="biographie"></textarea>
+        <label class="form-titre"><b>biographie</b></label><br>
+        <textarea class="form-champs" rows=<?=e("6")?> cols=<?=e("100")?> name="biographie"></textarea>
         <br>
-        <input type="hidden" name="size" value="250000" />
-        <input type="file" name="photo" size=20000000 />
+        <input class="form-champs" type="hidden" name="size" value="250000" />
+        <input class="form-champs" type="file" name="photo" size=20000000 />
         <div class="bouton">
-<button type="submit" name="bouton" class="btn btn-primary mb-2">insérer</button>
+<button  type="submit" name="bouton" class="btn btn-primary mb-2">insérer</button>
 </div>
     </form>
     
-    <a href="liste_acteur.php">Liste des Acteurs</a>
+    <a class="form-champs" href="liste_acteur.php">Liste des Acteurs</a>
 </body>
 </html>
 

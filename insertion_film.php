@@ -3,6 +3,9 @@ session_start();
 require "securite.php";
 ini_set("display_errors","1");
 error_reporting(E_ALL);
+function e($string, $flags=ENT_QUOTES){
+    return htmlspecialchars ($string,$flags);
+}
 
 $config = require "config.php";
 
@@ -45,28 +48,37 @@ if (isset($_FILES['Affiche']))
 ?>
 
 
-
-
-
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>insertion film</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
 <form action="insertion_film.php" method="POST" enctype="multipart/form-data">
 <h2>Film insertion</h2>
 
-<label><b>Nom du film</b></label><br>
-<input class="login" type="text" placeholder="Nom du film" name="Nom_du_film" required> <br>
+<label class="form-titre"><b>Nom du film</b></label><br>
+<input class="form-champs" class="login" type=<?=e("text")?> placeholder="Nom du film" name="Nom_du_film" required> <br>
 
-<label><b>Date de sortie</b></label><br>
-<input class="login" type="text" placeholder="Date de sortie" name="Date_de_sortie" required> <br>
+<label class="form-titre"><b>Date de sortie</b></label><br>
+<input class="form-champs" class="login" type=<?=e("text")?> placeholder="Date de sortie" name="Date_de_sortie" required> <br>
 
-<label><b>synopsis</b></label><br>
-<textarea rows="6" cols="100" name="synopsis" required></textarea> <br>
+<label class="form-titre"><b>synopsis</b></label><br>
+<textarea class="form-champs" rows=<?=e("6")?> cols=<?=e("100")?> name="synopsis" required></textarea> <br>
 
-<label><b>Affiche</b></label>
-<input type="hidden" name="size" value="250000" />
-<input type="file" name="Affiche" size=2000 />
+<input class="form-champs" type="hidden" name="size" value="250000" />
+<input class="form-champs" type="file" name="Affiche" size=2000 />
 
 <div class="bouton">
 <button type="submit" name="bouton" class="btn btn-primary mb-2">insérer</button>
 </div>
 </form>
 <a href="liste_films.php">Liste des films</a>
+</body>
+</html>
+
+

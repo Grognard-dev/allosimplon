@@ -38,8 +38,9 @@ require_once 'styleswitcher.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalogue</title>
-
+    <title>Contact</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" media="screen, projection" type="text/css" id="css" href="<?php echo $url; ?>" />
     
@@ -71,20 +72,20 @@ require_once 'styleswitcher.php';
 <?php include 'include/nav.php';?>
 
 <form action="contact.php" method="POST">
-            <h2>Contact</h2>
+            <h2 class="contact">Contact</h2>
 
             
-            <label><b>Nom d'utilisateur</b></label>
-            <input class="login" type="text" value="Nom d'utilisateur" name="nom_user" required> <br>
+            <label class="contact"><b>Nom d'utilisateur</b></label>
+            <input class="login" type=<?=e("text")?>  name="nom_user" required> <br>
 
-            <label><b>Prenom d'utilisateur</b></label>
-            <input class="login" type="text" value="Prenom d'utilisateur" name="prenom_user" required> <br>
+            <label class="contact"><b>Prenom d'utilisateur</b></label>
+            <input class="login" type=<?=e("text")?> name="prenom_user" required> <br>
 
-            <label><b>Email d'utilisateur</b></label>
-            <input class="login" type="email" value="Mail d'utilisateur" name="email_user" required> <br>
+            <label class="contact"><b>Email d'utilisateur</b></label>
+            <input class="login" type=<?=e("email")?>  name="email_user" required> <br>
 
-            <label><b>Message</b></label>
-            <textarea rows="6" cols="100" name="user_message" required></textarea><br>
+            <label class="contact"><b>Message</b></label>
+            <textarea rows=<?=e("6")?> cols=<?=e("100")?> name="user_message" value=<?=e("Message")?> required></textarea><br>
 
              <div class="bouton">
                 <button type="submit" name="bouton" class="btn btn-primary mb-2">Envoyer</button>

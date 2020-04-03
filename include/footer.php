@@ -1,7 +1,7 @@
 <!--FOOTER-->
 
 <footer>
-    <div class="col-footer">
+    <div >
         <div class="sous-footer">
             <p>
                 <h3 class="title-footer">A propos d'Allo Simplon</h3>
