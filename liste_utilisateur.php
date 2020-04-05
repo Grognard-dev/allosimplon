@@ -2,6 +2,9 @@
 session_start();
 ini_set("display_errors","1");
 error_reporting(E_ALL);
+function e($string, $flags=ENT_QUOTES){
+    return htmlspecialchars ($string,$flags);
+}
 
 $config = require "config.php";
 
@@ -40,12 +43,12 @@ if(isset($_POST['delete_user'])){
         </tr>
 <?php foreach($utilisateurs as $utilisateur):?>
 <tr>
-    <td><?= $utilisateur['ID']?></td>
-    <td><?= $utilisateur['Nom']?></td>
-    <td><a href="editer_utilisateur.php?ID=<?=$utilisateur['ID']?>">modifier</a></td>
+    <td><?= e($utilisateur['ID'])?></td>
+    <td><?= e($utilisateur['Nom'])?></td>
+    <td><a href="editer_utilisateur.php?ID=<?=urlencode($utilisateur['ID'])?>">modifier</a></td>
     <td>
      <form method="post">
-                <button type="submit" name="delete_user" value="<?= $utilisateur['ID']?>">Delete user</button>
+                <button type="submit" name="delete_user" value="<?= e($utilisateur['ID'])?>">Delete user</button>
             </form>
     </td>
 </tr>

@@ -1,9 +1,6 @@
 <?php
 session_start();
 require "securite.php";
-function e($string, $flags=ENT_QUOTES){
-    return htmlspecialchars ($string,$flags);
-}
 ini_set("display_errors","1");
 error_reporting(E_ALL);
 ?>
@@ -20,16 +17,16 @@ error_reporting(E_ALL);
     <form class="form-insert" action="insertion_acteur.php" method="POST" enctype="multipart/form-data">
     <h2>Film acteur</h2>
     <label class="form-titre"><b>Nom de l'Acteur</b></label><br>
-        <input class="form-champs" type=<?=e("text")?>   name="Nom">
+        <input class="form-champs" type="text"   name="Nom">
         <br>
         <label class="form-titre"><b>Date de naissance</b></label><br>
-        <input class="form-champs" type=<?=e("text")?>   name="Date_de_naissance">
+        <input class="form-champs" type="text"   name="Date_de_naissance">
         <br>
         <label class="form-titre"><b>Pays d'origine</b></label><br>
-        <input class="form-champs" type=<?=e("text")?>   name="Pays_d_origine">
+        <input class="form-champs" type="text"  name="Pays_d_origine">
         <br>
         <label class="form-titre"><b>biographie</b></label><br>
-        <textarea class="form-champs" rows=<?=e("6")?> cols=<?=e("100")?> name="biographie"></textarea>
+        <textarea class="form-champs" rows="6" cols="100" name="biographie"></textarea>
         <br>
         <input class="form-champs" type="hidden" name="size" value="250000" />
         <input class="form-champs" type="file" name="photo" size=20000000 />

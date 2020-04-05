@@ -97,7 +97,7 @@ if (isset($_POST['bouton'])){
 
 <label  class="form-titre">><b>Photo</b></label>
 <br>
-<img src="photoacteur/<?= e($acteurs['photo'])?>" alt="">
+<img src="photoacteur/<?= urlencode($acteurs['photo'])?>" alt="">
 <br>
 <input class="form-champs" type="hidden" name="size" value="250000" />
 <br>

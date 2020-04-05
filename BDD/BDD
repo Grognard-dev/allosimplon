@@ -1,0 +1,11 @@
+la relation favoris entre film et utilisateur a une cardinalité 0,n 0,n car un film peut avoir été mis en favoris par 0 ou plusieur utilisateur et un utilisateur peut avoir 0 ou plusieur film favoris.
+
+la relation liaison entre film et photo a une cardinalité 1,1 0,n par ce qu'un film peut avoir 0 ou plusieur photo et une photo est attaché a un et un seul film.
+
+la relation joue entre film et Acteur a une cardinalité 0,n 0,n car un film peut avoir 0 ou plusieurs acteur et un acteur peut avoir 0 ou plusieur film
+
+la relation produit entre film et Producteur a une cardinalité 0,n 0,n car un film peut avoir 0 ou plusieurs Producteur et un producteur peut avoir 0 ou plusieur film
+
+la relation realise entre film et Realisateur a une cardinalité 1,n 1,n car un film a forcement 1 ou plusieurs Realisateur et un Realisateur a forcement  1 ou plusieur film
+
+la relation type_film  entre film et Genre a une cardinalité 1,n 1,n car un film a forcement 1 ou plusieur Genre et un Genre a forcement 1 ou plusieur films .

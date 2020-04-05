@@ -23,7 +23,7 @@ $films = $liste->fetchAll();
     <div>
 <?php foreach($films as $film):?>
     <div class="affiche">
-     <a href="fiche_film.php?ID=<?=$film['ID']?>"><img src="affiche/<?=$film["Affiche"]?>" alt=""></a>
+     <a href="fiche_film.php?ID=<?=$film['ID']?>"><img src="affiche/<?=urlencode($film["Affiche"])?>" alt=""></a>
      <?php
      if(isset($_SESSION["is_admin"]) && $_SESSION["is_admin"]):?>
      <td><a href="editer_film.php?ID=<?=$film['ID']?>">modifier</a></td>  

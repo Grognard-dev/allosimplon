@@ -3,9 +3,6 @@ ini_set("display_errors","1");
 error_reporting(E_ALL);
 header('Content-type: text/html; charset=utf-8');
 require_once 'styleswitcher.php';
-function e($string, $flags=ENT_QUOTES){
-    return htmlspecialchars ($string,$flags);
-}
 
 $config = require "config.php";
 
@@ -100,10 +97,10 @@ rel="stylesheet">
 ?>
 
 <label><b>Nom d'utilisateur</b></label>
-<input class="login" type=<?=e("text")?>  name="pseudo_user" required> <br>
+<input class="login" type="text" name="pseudo_user" required> <br>
 
 <label><b>Mot de passe</b></label>
-<input class="login"  type=<?=e("password")?>  name="password_user" required><br>
+<input class="login"  type="password" name="password_user" required><br>
 
    <div class="bouton">
                 <button type="submit" name="bouton" class="btn btn-primary mb-2">connexion</button>

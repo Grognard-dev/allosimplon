@@ -1,9 +1,6 @@
 <?php
 header('Content-type: text/html; charset=utf-8');
 require_once 'styleswitcher.php';
-function e($string, $flags=ENT_QUOTES){
-    return htmlspecialchars ($string,$flags);
-}
             $config = require "config.php";
     
             $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
@@ -84,19 +81,19 @@ include 'include/nav.php'; ?>
             <h2>Inscription</h2>
 
             <label><b>Pseudo d'utilisateur</b></label>
-            <input class="login" type=<?=e("text")?> name="pseudo_user" required> <br>
+            <input class="login" type="text" name="pseudo_user" required> <br>
             
             <label><b>Nom d'utilisateur</b></label>
-            <input class="login" type=<?=e("text")?> name="nom_user" required> <br>
+            <input class="login" type="text" name="nom_user" required> <br>
 
             <label><b>Prenom d'utilisateur</b></label>
-            <input class="login" type=<?=e("text")?> name="prenom_user" required> <br>
+            <input class="login" type="text" name="prenom_user" required> <br>
 
             <label><b>Email d'utilisateur</b></label>
-            <input class="login" type=<?=e("text")?> name="email_user" required> <br>
+            <input class="login" type="text" name="email_user" required> <br>
 
             <label><b>Mot de passe</b></label>
-            <input class="login"  type=<?=e("password")?> placeholder=<?=e("Mot de passe")?> name="password_user" required><br>
+            <input class="login"  type="password" placeholder="Mot de passe" name="password_user" required><br>
 
              <div class="bouton">
                 <button type="submit" name="bouton" class="btn btn-primary mb-2">s'inscrire</button>

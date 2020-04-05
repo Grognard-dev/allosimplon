@@ -3,10 +3,6 @@ session_start();
 require "securite.php";
 ini_set("display_errors","1");
 error_reporting(E_ALL);
-function e($string, $flags=ENT_QUOTES){
-    return htmlspecialchars ($string,$flags);
-}
-
 $config = require "config.php";
 
 $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
@@ -62,13 +58,13 @@ if (isset($_FILES['Affiche']))
 <h2>Film insertion</h2>
 
 <label class="form-titre"><b>Nom du film</b></label><br>
-<input class="form-champs" class="login" type=<?=e("text")?> placeholder="Nom du film" name="Nom_du_film" required> <br>
+<input class="form-champs" class="login" type="text" placeholder="Nom du film" name="Nom_du_film" required> <br>
 
 <label class="form-titre"><b>Date de sortie</b></label><br>
-<input class="form-champs" class="login" type=<?=e("text")?> placeholder="Date de sortie" name="Date_de_sortie" required> <br>
+<input class="form-champs" class="login" type="text" placeholder="Date de sortie" name="Date_de_sortie" required> <br>
 
 <label class="form-titre"><b>synopsis</b></label><br>
-<textarea class="form-champs" rows=<?=e("6")?> cols=<?=e("100")?> name="synopsis" required></textarea> <br>
+<textarea class="form-champs" rows="6" cols="100" name="synopsis" required></textarea> <br>
 
 <input class="form-champs" type="hidden" name="size" value="250000" />
 <input class="form-champs" type="file" name="Affiche" size=2000 />

@@ -189,7 +189,7 @@ if(isset($_POST['delete_producteur'])){
 
 <label><b>Affiche</b></label>
 <br>
-<img src="affiche/<?= e($film['Affiche'])?>" alt="">
+<img src="affiche/<?= urlencode($film['Affiche'])?>" alt="">
 <br>
 <input class="form-champs" type="hidden" name="size" value="250000" />
 <input class="form-champs" type="file" name="Affiche" size=2000 />

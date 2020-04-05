@@ -2,7 +2,9 @@
 session_start();
 ini_set("display_errors","1");
 error_reporting(E_ALL);
-
+function e($string, $flags=ENT_QUOTES){
+    return htmlspecialchars ($string,$flags);
+}
 $config = require "config.php";
 
 $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
@@ -59,7 +61,7 @@ $producteurs_film = $requete_producteurs->fetchAll();
 <body>
     <h1><?= $films['Nom_du_film']?></h1>
     <div>
-        <img src="affiche/<?=$films['Affiche']?>" alt="">
+        <img src="affiche/<?=urlencode($films['Affiche'])?>" alt="">
     </div>
     <label><b>Date de sortie<b></label>
     <div>
@@ -84,7 +86,7 @@ $producteurs_film = $requete_producteurs->fetchAll();
     <div>
         <?php foreach($acteurs_film as $acteur):?>
         <ul>
-            <li><img src="photoacteur/<?=$acteur['photo']?>" alt="">
+            <li><img src="photoacteur/<?=urlencode($acteur['photo'])?>" alt="">
             <?=$acteur['Nom']?>
             </li>
         </ul>
@@ -95,7 +97,7 @@ $producteurs_film = $requete_producteurs->fetchAll();
      <div>
         <?php foreach($realisateurs_film as $realisateur):?>
         <ul>
-            <li><img src="photorealisateur/<?=$realisateur['photo']?>" alt="">
+            <li><img src="photorealisateur/<?=urlencode($realisateur['photo'])?>" alt="">
             <?=$realisateur['Nom']?>
             </li>
         </ul>
@@ -106,7 +108,7 @@ $producteurs_film = $requete_producteurs->fetchAll();
      <div>
         <?php foreach($producteurs_film as $producteur):?>
         <ul>
-            <li><img src="photoproducteur/<?=$producteur['photo']?>" alt="">
+            <li><img src="photoproducteur/<?=urlencode($producteur['photo'])?>" alt="">
             <?=$producteur['Nom']?>
             </li>
         </ul>
