@@ -90,7 +90,7 @@ include 'include/nav.php'; ?>
             <input class="login" type="text" name="prenom_user" required> <br>
 
             <label><b>Email d'utilisateur</b></label>
-            <input class="login" type="text" name="email_user" required> <br>
+            <input class="login" type="email" name="email_user" required> <br>
 
             <label><b>Mot de passe</b></label>
             <input class="login"  type="password" placeholder="Mot de passe" name="password_user" required><br>

@@ -18,7 +18,7 @@ $config = require "config.php";
 $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
 
 $edit=$dbh->prepare("SELECT * FROM utilisateur WHERE ID_utilisateur = :ID");
-$edit->bindValue(':ID', $_SESSION['ID']);
+$edit->bindValue(':ID', $_GET['ID']);
 $edit->execute();
 $utilisateurs=$edit->fetch();
 
@@ -45,7 +45,7 @@ if (isset($_POST['bouton'])){
             $modifier_utilisateur->execute();
 
             $_SESSION['flash'] = "Modification effectuer";
-            header('Location: editer_utilisateur.php?ID='.$_SESSION['ID']);
+            header('Location: editer_utilisateur.php?ID='.$_GET['ID']);
             die;
         
     }
@@ -90,7 +90,7 @@ if (isset($_POST['bouton'])){
 <?php if($message != null):?>
   <p><?=e($message)?></p>
 <?php endif?>
-<a href="https://lefevre.simplon-charleville.fr/allosimplon/user_compte.php?ID=<?=$_SESSION['ID']?>">Retour a votre compte</a>
+<a href="https://lefevre.simplon-charleville.fr/allosimplon/user_compte.php?ID=<?=$_GET['ID']?>">Retour a votre compte</a>
 </form>
 
 </body>

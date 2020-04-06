@@ -41,7 +41,7 @@ $compte = $comptes->fetch();
     <div>
         <p><?=e($compte['Pseudo'])?></p>
     </div>
-    <td><a href="editer_utilisateur.php?ID=<?=$_SESSION["ID"]?>">modifier mes données</a></td>
+    <td><a href="editer_utilisateur.php?ID=<?=$_GET["ID"]?>">modifier mes données</a></td>
     <a href="https://lefevre.simplon-charleville.fr/allosimplon?ID=<?=$_SESSION["ID"]?>">Retour a l'accueil</a>
 </body>
 </html>
