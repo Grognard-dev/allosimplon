@@ -74,7 +74,7 @@ $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
         <?php if($req->rowCount()>0): ?>
             <h3>Résultats de votre recherche</h3>
         <?php while ($s = $req->fetch()): ?>
-            <li><a href="fiche_film.php?id=<?=$s['ID_film']?>"><?=$s['Nom_du_film']?></a></li>
+            <li><a href="fiche_film.php?ID=<?=$s['ID_film']?>"><?=$s['Nom_du_film']?></a></li>
         <?php endwhile ?>
         <?php else: ?>
             <h2>Aucun résultat</h2>
