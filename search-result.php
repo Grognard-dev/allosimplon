@@ -85,7 +85,6 @@ $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
 
 </section>
     <?php 
-    // end of if
         }
     include 'include/footer.php'; ?>
 
