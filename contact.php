@@ -25,7 +25,7 @@ if (isset($_POST['bouton'])){
 
 <?php
 header('Content-type: text/html; charset=utf-8');
-require_once 'styleswitcher.php';
+require_once 'styleswitcher.php'; 
 ?>
 
 
