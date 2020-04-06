@@ -61,9 +61,9 @@ $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
 
         if(isset($_GET['search']) AND !empty($_GET['search'])) {
             $search = htmlspecialchars($_GET['search']);
-            $req = $dbh->prepare('  SELECT f.ID_film,f.Nom
+            $req = $dbh->prepare('  SELECT f.ID_film,f.Nom_du_film
                                     FROM Film f
-                                    WHERE f.Nom LIKE "%'.$search.'%"');
+                                    WHERE f.Nom_du_film LIKE "%'.$search.'%"');
             $req->execute();
         
     ?>
@@ -71,10 +71,10 @@ $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
 <section id="search-result">
 
     <ul class="result-list">
-        <?php if($req->rowCount()): ?>
+        <?php if($req->rowCount()>0): ?>
             <h3>Résultats de votre recherche</h3>
         <?php while ($s = $req->fetch()): ?>
-            <li><a href="films.php?id=<?=$s['ID_film']?>"><?=$s['Nom']?></a></li>
+            <li><a href="fiche_film.php?id=<?=$s['ID_film']?>"><?=$s['Nom_du_film']?></a></li>
         <?php endwhile ?>
         <?php else: ?>
             <h2>Aucun résultat</h2>
