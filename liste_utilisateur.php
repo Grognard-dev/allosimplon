@@ -15,7 +15,7 @@ $liste->execute();
 $utilisateurs = $liste->fetchAll();
 
 if(isset($_POST['delete_user'])){
-    $delete=$dbh->prepare("DELETE FROM utilisateur WHERE ID = :ID LIMIT 1");
+    $delete=$dbh->prepare("DELETE FROM utilisateur WHERE ID_utilisateur = :ID LIMIT 1");
     $delete->bindValue(':ID',$_POST['delete_user']);
     $delete->execute();
     $_SESSION['flash'] = "Suppression effectuée";
@@ -43,12 +43,12 @@ if(isset($_POST['delete_user'])){
         </tr>
 <?php foreach($utilisateurs as $utilisateur):?>
 <tr>
-    <td><?= e($utilisateur['ID'])?></td>
+    <td><?= e($utilisateur['ID_utilisateur'])?></td>
     <td><?= e($utilisateur['Nom'])?></td>
-    <td><a href="editer_utilisateur.php?ID=<?=urlencode($utilisateur['ID'])?>">modifier</a></td>
+    <td><a href="editer_utilisateur.php?ID=<?=urlencode($utilisateur['ID_utilisateur'])?>">modifier</a></td>
     <td>
      <form method="post">
-                <button type="submit" name="delete_user" value="<?= e($utilisateur['ID'])?>">Delete user</button>
+                <button type="submit" name="delete_user" value="<?= e($utilisateur['ID_utilisateur'])?>">Delete user</button>
             </form>
     </td>
 </tr>

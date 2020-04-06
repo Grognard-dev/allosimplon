@@ -31,7 +31,7 @@ if (isset($_FILES['Affiche']))
     if ($_FILES['Affiche']['size'] <= 250000)
     {  
             move_uploaded_file($_FILES['Affiche']['tmp_name'], 'affiche/' . $_FILES['Affiche']['name']);
-            $requete = $dbh->prepare("UPDATE Film SET Affiche = :Affiche WHERE ID = :ID ");
+            $requete = $dbh->prepare("UPDATE Film SET Affiche = :Affiche WHERE ID_film = :ID ");
             $requete->bindValue(':ID', $ID);
             $requete->bindValue(':Affiche', $_FILES['Affiche']['name']);
            

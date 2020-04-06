@@ -17,7 +17,7 @@ $config = require "config.php";
 
 $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
 
-$edit=$dbh->prepare("SELECT * FROM utilisateur WHERE ID = :ID");
+$edit=$dbh->prepare("SELECT * FROM utilisateur WHERE ID_utilisateur = :ID");
 $edit->bindValue(':ID', $_SESSION['ID']);
 $edit->execute();
 $utilisateurs=$edit->fetch();
@@ -35,7 +35,7 @@ if (isset($_POST['bouton'])){
             Prenom = :Prenom,
             Pseudo = :Pseudo,
             Email = :Email, 
-            mot_de_passe = :mot_de_passe WHERE ID = :ID" );
+            mot_de_passe = :mot_de_passe WHERE ID_utilisateur = :ID" );
             $modifier_utilisateur->bindValue(':ID', $_GET['ID']);
             $modifier_utilisateur->bindValue(':Nom', $Nom);
             $modifier_utilisateur->bindValue(':Prenom', $Prenom);

@@ -17,7 +17,7 @@ $config = require "config.php";
 
 $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
 
-$edit=$dbh->prepare("SELECT * FROM Producteur WHERE ID = :ID");
+$edit=$dbh->prepare("SELECT * FROM Producteur WHERE ID_producteur = :ID");
 $edit->bindValue(':ID', $_GET['ID']);
 $edit->execute();
 $producteurs=$edit->fetch();
@@ -38,7 +38,7 @@ if (isset($_POST['bouton'])){
                 if ($_FILES['photo']['size'] <= 250000)
                 {  
                     move_uploaded_file($_FILES['photo']['tmp_name'], 'photoproducteur/' . $_FILES['photo']['name']);
-                    $requete = $dbh->prepare("UPDATE Producteur SET photo = :photo WHERE ID = :ID ");
+                    $requete = $dbh->prepare("UPDATE Producteur SET photo = :photo WHERE ID_producteur = :ID ");
                     $requete->bindValue(':ID',$_GET['ID'] );
                     $requete->bindValue(':photo', $_FILES['photo']['name']);
                 
@@ -53,7 +53,7 @@ if (isset($_POST['bouton'])){
             Nom = :Nom, 
             Date_de_naissance = :Date_de_naissance,
             Pays_d_origine = :Pays_d_origine,
-            biographie = :biographie WHERE ID = :ID" );
+            biographie = :biographie WHERE ID_producteur = :ID" );
             $modifier_producteur->bindValue(':ID', $_GET['ID']);
             $modifier_producteur->bindValue(':Nom', $Nom);
             $modifier_producteur->bindValue(':Date_de_naissance', $Date_de_naissance);

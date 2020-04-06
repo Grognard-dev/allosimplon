@@ -14,7 +14,7 @@ if(isset($_SESSION['flash']) ){
 }
 $config = require "config.php";
 $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
-$edit=$dbh->prepare("SELECT * FROM Film WHERE ID = :ID");
+$edit=$dbh->prepare("SELECT * FROM Film WHERE ID_film = :ID");
 $edit->bindValue(':ID', $_GET['ID']);
 $edit->execute();
 $film=$edit->fetch();
@@ -31,7 +31,7 @@ if (isset($_POST['bouton'])){
             if ($_FILES['Affiche']['size'] <= 250000)
             {  
                 move_uploaded_file($_FILES['Affiche']['tmp_name'], 'affiche/' . $_FILES['Affiche']['name']);
-                $requete = $dbh->prepare("UPDATE Film SET Affiche = :Affiche WHERE ID = :ID ");
+                $requete = $dbh->prepare("UPDATE Film SET Affiche = :Affiche WHERE ID_film = :ID ");
                 $requete->bindValue(':ID',$_GET['ID'] );
                 $requete->bindValue(':Affiche', $_FILES['Affiche']['name']);
                 
@@ -44,7 +44,7 @@ if (isset($_POST['bouton'])){
         $modifier_film = $dbh->prepare ("UPDATE Film SET 
         Nom_du_film = :Nom_du_film, 
         Date_de_sortie = :Date_de_sortie,
-        synopsis = :synopsis WHERE ID = :ID" );
+        synopsis = :synopsis WHERE ID_film = :ID" );
         $modifier_film->bindValue(':ID', $_GET['ID']);
         $modifier_film->bindValue(':Nom_du_film', $Nom_du_film);
         $modifier_film->bindValue(':Date_de_sortie', $Date_de_sortie);
@@ -52,14 +52,14 @@ if (isset($_POST['bouton'])){
         $modifier_film->execute();
         
         $_SESSION['flash'] = "Modification effectuer";
-        header('Location: editer_film.php?ID='.$film['ID']);
+        header('Location: editer_film.php?ID='.$film['ID_film']);
         die;
     }
 }
 $requete_acteurs = $dbh->prepare("
 SELECT *
 FROM Acteur
-INNER JOIN joue ON joue.ID_Acteur = Acteur.ID
+INNER JOIN joue ON joue.ID_Acteur = Acteur.ID_acteur
 WHERE ID_film = :ID
 ");
 $requete_acteurs->bindValue(':ID',$_GET['ID']);
@@ -77,7 +77,7 @@ if(isset($_POST['ajout_acteur'])){
 $requete_genres = $dbh->prepare("
 SELECT *
 FROM Genre
-INNER JOIN genre ON genre.ID_Genre = Genre.ID
+INNER JOIN genre ON genre.ID_Genre = Genre.ID_genre
 WHERE ID_film = :ID
 ");
 $requete_genres->bindValue(':ID',$_GET['ID']);
@@ -95,7 +95,7 @@ if(isset($_POST['ajout_genre'])){
 $requete_realisateurs = $dbh->prepare("
 SELECT *
 FROM Realisateur
-INNER JOIN realise ON realise.ID_realisateur = Realisateur.ID
+INNER JOIN realise ON realise.ID_realisateur = Realisateur.ID_realisateur
 WHERE ID_film = :ID
 ");
 $requete_realisateurs->bindValue(':ID',$_GET['ID']);
@@ -113,7 +113,7 @@ if(isset($_POST['ajout_realisateur'])){
 $requete_producteurs = $dbh->prepare("
 SELECT *
 FROM Producteur
-INNER JOIN produit ON produit.ID_Producteur = Producteur.ID
+INNER JOIN produit ON produit.ID_Producteur = Producteur.ID_producteur
 WHERE ID_film = :ID
 ");
 $requete_producteurs->bindValue(':ID',$_GET['ID']);
@@ -216,12 +216,12 @@ if(isset($_POST['delete_producteur'])){
             <?php endforeach ?>
             </div>
              <form method="post">
-            <?php $sth = $dbh->prepare("SELECT ID,genre FROM Genre ORDER BY genre");
+            <?php $sth = $dbh->prepare("SELECT ID_genre,types FROM Genre ORDER BY types");
             $sth->execute();
             $tousgenre = $sth->fetchAll();
             echo "<select name='select_genre' >";
             foreach($tousgenre as $genre){
-                echo   "<option value=".$genre["ID"].">".$genre["genre"]."</option>";
+                echo   "<option value=".$genre["ID_genre"].">".$genre["types"]."</option>";
             } 
             echo "</select>";
             ?>
@@ -231,12 +231,12 @@ if(isset($_POST['delete_producteur'])){
             </form>
             
             <form method="post">
-            <?php $sth = $dbh->prepare("SELECT ID,Nom FROM Acteur ORDER BY Nom");
+            <?php $sth = $dbh->prepare("SELECT ID_acteur,Nom FROM Acteur ORDER BY Nom");
             $sth->execute();
             $tousacteurs = $sth->fetchAll();
             echo "<select name='select' >";
             foreach($tousacteurs as $acteur){
-                echo   "<option value=".$acteur["ID"].">".$acteur["Nom"]."</option>";
+                echo   "<option value=".$acteur["ID_acteur"].">".$acteur["Nom"]."</option>";
             } 
             echo "</select>";
             ?>
@@ -250,19 +250,19 @@ if(isset($_POST['delete_producteur'])){
             <li><img src="photoacteur/<?=$acteur['photo']?>" alt="">
             <?=$acteur['Nom']?>
             <form method="post">
-                <button type="submit" name="delete" value="<?= $acteur['ID']?>">Delete</button>
+                <button type="submit" name="delete" value="<?= $acteur['ID_acteur']?>">Delete</button>
             </form>
             </li>
             </ul>
             <?php endforeach ?>
 
             <form method="post">
-            <?php $sth = $dbh->prepare("SELECT ID,Nom FROM Realisateur ORDER BY Nom");
+            <?php $sth = $dbh->prepare("SELECT ID_realisateur,Nom FROM Realisateur ORDER BY Nom");
             $sth->execute();
             $tousrealisateur = $sth->fetchAll();
             echo "<select name='select_realisateur' >";
             foreach($tousrealisateur as $realisateur){
-                echo   "<option value=".$realisateur["ID"].">".$realisateur["Nom"]."</option>";
+                echo   "<option value=".$realisateur["ID_realisateur"].">".$realisateur["Nom"]."</option>";
             } 
             echo "</select>";
             ?>
@@ -276,19 +276,19 @@ if(isset($_POST['delete_producteur'])){
             <li><img src="photorealisateur/<?=$realisateur['photo']?>" alt="">
             <?=$realisateur['Nom']?>
             <form method="post">
-                <button type="submit" name="delete_realisateur" value="<?= $realisateur['ID']?>">Delete</button>
+                <button type="submit" name="delete_realisateur" value="<?= $realisateur['ID_realisateur']?>">Delete</button>
             </form>
             </li>
             </ul>
             <?php endforeach ?>
 
              <form method="post">
-            <?php $sth = $dbh->prepare("SELECT ID,Nom FROM Producteur ORDER BY Nom");
+            <?php $sth = $dbh->prepare("SELECT ID_producteur,Nom FROM Producteur ORDER BY Nom");
             $sth->execute();
             $tousproducteurs = $sth->fetchAll();
             echo "<select name='select_producteur' >";
             foreach($tousproducteurs as $producteur){
-                echo   "<option value=".$producteur["ID"].">".$producteur["Nom"]."</option>";
+                echo   "<option value=".$producteur["ID_producteur"].">".$producteur["Nom"]."</option>";
             } 
             echo "</select>";
             ?>
@@ -302,7 +302,7 @@ if(isset($_POST['delete_producteur'])){
             <li><img src="photoproducteur/<?=$producteur['photo']?>" alt="">
             <?=$producteur['Nom']?>
             <form method="post">
-                <button type="submit" name="delete_producteur" value="<?= $producteur['ID']?>">Delete</button>
+                <button type="submit" name="delete_producteur" value="<?= $producteur['ID_producteur']?>">Delete</button>
             </form>
             </li>
             </ul>

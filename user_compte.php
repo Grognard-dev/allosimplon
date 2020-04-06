@@ -10,7 +10,7 @@ $config = require "config.php";
 
 $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
 
-$comptes = $dbh->prepare("SELECT * FROM utilisateur WHERE ID = :ID");
+$comptes = $dbh->prepare("SELECT * FROM utilisateur WHERE ID_utilisateur = :ID");
 $comptes->bindValue(':ID', $_GET['ID']);
 $comptes->execute();
 $compte = $comptes->fetch();

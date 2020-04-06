@@ -17,7 +17,7 @@ $config = require "config.php";
 
 $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
 
-$edit=$dbh->prepare("SELECT * FROM Realisateur WHERE ID = :ID");
+$edit=$dbh->prepare("SELECT * FROM Realisateur WHERE ID_realisateur = :ID");
 $edit->bindValue(':ID', $_GET['ID']);
 $edit->execute();
 $realisateurs=$edit->fetch();
@@ -37,8 +37,8 @@ if (isset($_POST['bouton'])){
             {  
                 if ($_FILES['photo']['size'] <= 250000)
                 {  
-                    move_uploaded_file($_FILES['photo']['tmp_name'], 'photoacteur/' . $_FILES['photo']['name']);
-                    $requete = $dbh->prepare("UPDATE Acteur SET photo = :photo WHERE ID = :ID ");
+                    move_uploaded_file($_FILES['photo']['tmp_name'], 'photorealisateur/' . $_FILES['photo']['name']);
+                    $requete = $dbh->prepare("UPDATE Realisateur SET photo = :photo WHERE ID_realisateur = :ID ");
                     $requete->bindValue(':ID',$_GET['ID'] );
                     $requete->bindValue(':photo', $_FILES['photo']['name']);
                 
@@ -49,20 +49,20 @@ if (isset($_POST['bouton'])){
                 }
             }
 
-            $modifier_acteur = $dbh->prepare ("UPDATE Realisateur SET 
+            $modifier_realisateur = $dbh->prepare ("UPDATE Realisateur SET 
             Nom = :Nom, 
             Date_de_naissance = :Date_de_naissance,
             Pays_d_origine = :Pays_d_origine,
-            biographie = :biographie WHERE ID = :ID" );
-            $modifier_acteur->bindValue(':ID', $_GET['ID']);
-            $modifier_acteur->bindValue(':Nom', $Nom);
-            $modifier_acteur->bindValue(':Date_de_naissance', $Date_de_naissance);
-            $modifier_acteur->bindValue(':Pays_d_origine', $Pays_d_origine);
-            $modifier_acteur->bindValue(':biographie', $biographie);
-            $modifier_acteur->execute();
+            biographie = :biographie WHERE ID_realisateur = :ID" );
+            $modifier_realisateur->bindValue(':ID', $_GET['ID']);
+            $modifier_realisateur->bindValue(':Nom', $Nom);
+            $modifier_realisateur->bindValue(':Date_de_naissance', $Date_de_naissance);
+            $modifier_realisateur->bindValue(':Pays_d_origine', $Pays_d_origine);
+            $modifier_realisateur->bindValue(':biographie', $biographie);
+            $modifier_realisateur->execute();
 
             $_SESSION['flash'] = "Modification effectuer";
-            header('Location: editer_acteur.php?ID='.$acteurs['ID']);
+            header('Location: editer_realisateur.php?ID='.$realisateurs['ID']);
             die;
         }
     }

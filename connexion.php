@@ -33,7 +33,7 @@ if (isset($_POST['bouton'])){
                 session_start();
             }
             session_regenerate_id();
-            $_SESSION["ID"] = $utilisateur["ID"];
+            $_SESSION["ID"] = $utilisateur["ID_utilisateur"];
             $_SESSION["Pseudo"] = $utilisateur["Pseudo"];
             if($utilisateur["Admin"] === "1"){
                 $_SESSION['is_admin'] = true;

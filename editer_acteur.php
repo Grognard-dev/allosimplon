@@ -17,7 +17,7 @@ $config = require "config.php";
 
 $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
 
-$edit=$dbh->prepare("SELECT * FROM Acteur WHERE ID = :ID");
+$edit=$dbh->prepare("SELECT * FROM Acteur WHERE ID_acteur = :ID");
 $edit->bindValue(':ID', $_GET['ID']);
 $edit->execute();
 $acteurs=$edit->fetch();
@@ -38,7 +38,7 @@ if (isset($_POST['bouton'])){
                 if ($_FILES['photo']['size'] <= 250000)
                 {  
                     move_uploaded_file($_FILES['photo']['tmp_name'], 'photoacteur/' . $_FILES['photo']['name']);
-                    $requete = $dbh->prepare("UPDATE Acteur SET photo = :photo WHERE ID = :ID ");
+                    $requete = $dbh->prepare("UPDATE Acteur SET photo = :photo WHERE ID_acteur = :ID ");
                     $requete->bindValue(':ID',$_GET['ID'] );
                     $requete->bindValue(':photo', $_FILES['photo']['name']);
                 
@@ -53,7 +53,7 @@ if (isset($_POST['bouton'])){
             Nom = :Nom, 
             Date_de_naissance = :Date_de_naissance,
             Pays_d_origine = :Pays_d_origine,
-            biographie = :biographie WHERE ID = :ID" );
+            biographie = :biographie WHERE ID_acteur = :ID" );
             $modifier_acteur->bindValue(':ID', $_GET['ID']);
             $modifier_acteur->bindValue(':Nom', $Nom);
             $modifier_acteur->bindValue(':Date_de_naissance', $Date_de_naissance);
@@ -62,7 +62,7 @@ if (isset($_POST['bouton'])){
             $modifier_acteur->execute();
 
             $_SESSION['flash'] = "Modification effectuer";
-            header('Location: editer_acteur.php?ID='.$acteurs['ID']);
+            header('Location: editer_acteur.php?ID='.$acteurs['ID_acteur']);
             die;
         }
     }

@@ -11,7 +11,7 @@ $liste = $dbh->prepare("SELECT * FROM Acteur");
 $liste->execute();
 $acteurs = $liste->fetchAll();
 if(isset($_POST['delete_acteur'])){
-    $delete=$dbh->prepare("DELETE FROM Acteur WHERE ID = :ID LIMIT 1");
+    $delete=$dbh->prepare("DELETE FROM Acteur WHERE ID_acteur = :ID LIMIT 1");
     $delete->bindValue(':ID',$_POST['delete_acteur']);
     $delete->execute();
     $_SESSION['flash'] = "Suppression effectuée";
@@ -39,13 +39,13 @@ if(isset($_POST['delete_acteur'])){
         </tr>
 <?php foreach($acteurs as $acteur):?>
 <tr>
-    <td><?= $acteur['ID']?></td>
+    <td><?= $acteur['ID_acteur']?></td>
     <td><?= $acteur['Nom']?></td>
-    <td><a href="editer_acteur.php?ID=<?=$acteur['ID']?>">modifier</a></td>
+    <td><a href="editer_acteur.php?ID=<?=$acteur['ID_acteur']?>">modifier</a></td>
 </tr>
  <td>
      <form method="post">
-                <button type="submit" name="delete_acteur" value="<?= $acteur['ID']?>">Delete realisateur</button>
+                <button type="submit" name="delete_acteur" value="<?= $acteur['ID_acteur']?>">Delete realisateur</button>
             </form>
     </td>
 

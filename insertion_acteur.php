@@ -70,7 +70,7 @@ if (isset($_FILES['photo']))
     if ($_FILES['photo']['size'] <= 250000)
     {  
         move_uploaded_file($_FILES['photo']['tmp_name'], 'photoacteur/' . $_FILES['photo']['name']);
-        $requete = $dbh->prepare("UPDATE Acteur SET photo = :photo WHERE ID = :ID ");
+        $requete = $dbh->prepare("UPDATE Acteur SET photo = :photo WHERE ID_acteur = :ID ");
         $requete->bindValue(':ID', $ID);
         $requete->bindValue(':photo', $_FILES['photo']['name']);
         

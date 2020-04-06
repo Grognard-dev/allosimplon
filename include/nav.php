@@ -60,8 +60,8 @@
         <h1><a class="lien-home" href="index.php">ALLO SIMPLON</a> </h1>
     </div>
     <div class="menu-nav">
-        <form class="search-bar" action="">
-            <input type="text" placeholder="" name="search">
+        <form class="search-bar" action="search-result.php" method="GET">
+            <input type="search" placeholder="Rechercher un film" name="search">
             <button class="search-button" type="submit"><i class="fa fa-search"></i></button>
         </form>
         <div class="menu-dada">

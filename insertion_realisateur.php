@@ -17,7 +17,7 @@ error_reporting(E_ALL);
     
     <form action="insertion_realisateur.php" method="POST" enctype="multipart/form-data">
         <label class="form-titre"><b>Nom du Realisateur</b></label><br>
-        <input class="form-champs" type="text">   name="Nom">
+        <input class="form-champs" type="text"   name="Nom">
         <br>
         <label class="form-titre"><b>Date de naissance</b></label><br>
         <input class="form-champs" type="text"  name="Date_de_naissance">
@@ -70,7 +70,7 @@ if (isset($_FILES['photo']))
     if ($_FILES['photo']['size'] <= 250000)
     {  
         move_uploaded_file($_FILES['photo']['tmp_name'], 'photorealisateur/' . $_FILES['photo']['name']);
-        $requete = $dbh->prepare("UPDATE Realisateur SET photo = :photo WHERE ID = :ID ");
+        $requete = $dbh->prepare("UPDATE Realisateur SET photo = :photo WHERE ID_realisateur = :ID ");
         $requete->bindValue(':ID', $ID);
         $requete->bindValue(':photo', $_FILES['photo']['name']);
         
