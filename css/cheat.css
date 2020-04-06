@@ -1,0 +1,21 @@
+@keyframes mymove {
+  0%   {right: 0px;  width: 100px;}
+  50% {right: 0px; width: 150px}
+  100% {right: 500px;  width: 300px;}
+}
+
+#bouge{ 
+  color:#3366cc;
+  animation-duration: 10s;
+  animation-name: mymove;
+  transform-origin: 0 0;
+  height: 300px;
+}
+#conteneur{
+   width: 100px;
+  height: 100px;
+  position: relative;
+  animation: mymove 5s infinite;
+  position:absolute;
+  display: none;
+}

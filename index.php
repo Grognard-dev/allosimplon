@@ -14,6 +14,7 @@ require_once 'styleswitcher.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ALLO SIMPLON</title>
+    <link rel="stylesheet" href="css/cheat.css">
 
     <!--SLICK-->
 
@@ -74,7 +75,14 @@ require_once 'styleswitcher.php';
     include 'include/footer.php';
     ?>
 
-
+ <script src="js/konami.js"></script>
+  <script>
+    var easter_egg = new Konami(function() {
+      var conteneur = document.querySelector("#conteneur")
+      conteneur.style.display="block"
+    });
+  </script>
+    <div id="conteneur"><div id="bouge"><img src="img/tank.gif" alt=""></div></div>
     <script type="text/javascript" src="slick\slick\slick.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
