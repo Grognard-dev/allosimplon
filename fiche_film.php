@@ -9,7 +9,7 @@ $config = require "config.php";
 
 $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
 
-$liste = $dbh->prepare("SELECT * FROM Film WHERE ID = :ID");
+$liste = $dbh->prepare("SELECT * FROM Film WHERE ID_film = :ID");
 $liste->bindValue(':ID', $_GET['ID']);
 $liste->execute();
 $films = $liste->fetch();
@@ -26,7 +26,7 @@ $genres_film = $requete_genres->fetchAll();
 $requete_acteurs = $dbh->prepare("
     SELECT *
     FROM Acteur
-    INNER JOIN joue ON joue.ID_Acteur = Acteur.ID
+    INNER JOIN joue ON joue.ID_Acteur = Acteur.ID_acteur
     WHERE ID_film = :ID
 ");
 $requete_acteurs->bindValue(':ID',$_GET['ID']);
@@ -35,7 +35,7 @@ $acteurs_film = $requete_acteurs->fetchAll();
 $requete_realisateurs = $dbh->prepare("
     SELECT *
     FROM Realisateur
-    INNER JOIN realise ON realise.ID_realisateur = Realisateur.ID
+    INNER JOIN realise ON realise.ID_realisateur = Realisateur.ID_realisateur
     WHERE ID_film = :ID
 ");
 $requete_realisateurs->bindValue(':ID',$_GET['ID']);
@@ -44,7 +44,7 @@ $realisateurs_film = $requete_realisateurs->fetchAll();
 $requete_producteurs = $dbh->prepare("
     SELECT *
     FROM Producteur
-    INNER JOIN produit ON produit.ID_Producteur = Producteur.ID
+    INNER JOIN produit ON produit.ID_Producteur = Producteur.ID_producteur
     WHERE ID_film = :ID
 ");
 $requete_producteurs->bindValue(':ID',$_GET['ID']);
@@ -76,7 +76,7 @@ $producteurs_film = $requete_producteurs->fetchAll();
         <?php foreach($genres_film as $genre):?>
         <ul>
             <li>
-            <?=$genre['genre']?>
+            <?=$genre['types']?>
             </li>
         </ul>
         <?php endforeach ?>

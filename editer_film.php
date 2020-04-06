@@ -71,25 +71,25 @@ if(isset($_POST['ajout_acteur'])){
     $requete_ajout->bindValue(':ID_film', $_GET['ID']);
     $requete_ajout->execute();
      $_SESSION['flash'] = "Ajout effectué";
-        header('Location: editer_film.php?ID='.$film['ID']);
+        header('Location: editer_film.php?ID='.$film['ID_film']);
         die;
 }
 $requete_genres = $dbh->prepare("
 SELECT *
 FROM Genre
-INNER JOIN genre ON genre.ID_Genre = Genre.ID_genre
+INNER JOIN type_film ON type_film.ID_Genre = Genre.ID_genre
 WHERE ID_film = :ID
 ");
 $requete_genres->bindValue(':ID',$_GET['ID']);
 $requete_genres->execute();
 $genres_film = $requete_genres->fetchAll();
 if(isset($_POST['ajout_genre'])){
-    $requete_ajout=$dbh->prepare("INSERT INTO genre (ID_Genre,ID_film) VALUES (:ID_Genre,:ID_film)");
+    $requete_ajout=$dbh->prepare("INSERT INTO type_film (ID_Genre,ID_film) VALUES (:ID_Genre,:ID_film)");
     $requete_ajout->bindValue(':ID_Genre',$_POST['select_genre']);
     $requete_ajout->bindValue(':ID_film', $_GET['ID']);
     $requete_ajout->execute();
      $_SESSION['flash'] = "Ajout effectué";
-        header('Location: editer_film.php?ID='.$film['ID']);
+        header('Location: editer_film.php?ID='.$film['ID_film']);
         die;
 }
 $requete_realisateurs = $dbh->prepare("
@@ -107,7 +107,7 @@ if(isset($_POST['ajout_realisateur'])){
     $requete_ajout->bindValue(':ID_film', $_GET['ID']);
     $requete_ajout->execute();
      $_SESSION['flash'] = "Ajout effectué";
-        header('Location: editer_film.php?ID='.$film['ID']);
+        header('Location: editer_film.php?ID='.$film['ID_film']);
         die;
 }
 $requete_producteurs = $dbh->prepare("
@@ -125,7 +125,7 @@ if(isset($_POST['ajout_producteur'])){
     $requete_ajout->bindValue(':ID_film', $_GET['ID']);
     $requete_ajout->execute();
      $_SESSION['flash'] = "Ajout effectué";
-        header('Location: editer_film.php?ID='.$film['ID']);
+        header('Location: editer_film.php?ID='.$film['ID_film']);
         die;
 }
 if(isset($_POST['delete'])){
@@ -134,16 +134,16 @@ if(isset($_POST['delete'])){
     $delete->bindValue(':ID_film',$_GET['ID']);
     $delete->execute();
     $_SESSION['flash'] = "Suppression effectuée";
-        header('Location: editer_film.php?ID='.$film['ID']);
+        header('Location: editer_film.php?ID='.$film['ID_film']);
         die;
 }
 if(isset($_POST['delete_genre'])){
-    $delete=$dbh->prepare("DELETE FROM genre WHERE ID_Genre = :ID AND ID_film = :ID_film LIMIT 1");
+    $delete=$dbh->prepare("DELETE FROM type_film WHERE ID_Genre = :ID AND ID_film = :ID_film LIMIT 1");
     $delete->bindValue(':ID',$_POST['delete_genre']);
     $delete->bindValue(':ID_film',$_GET['ID']);
     $delete->execute();
     $_SESSION['flash'] = "Suppression effectuée";
-        header('Location: editer_film.php?ID='.$film['ID']);
+        header('Location: editer_film.php?ID='.$film['ID_film']);
         die;
 }
 if(isset($_POST['delete_realisateur'])){
@@ -152,7 +152,7 @@ if(isset($_POST['delete_realisateur'])){
     $delete->bindValue(':ID_film',$_GET['ID']);
     $delete->execute();
     $_SESSION['flash'] = "Suppression effectuée";
-        header('Location: editer_film.php?ID='.$film['ID']);
+        header('Location: editer_film.php?ID='.$film['ID_film']);
         die;
 }
 if(isset($_POST['delete_producteur'])){
@@ -161,7 +161,7 @@ if(isset($_POST['delete_producteur'])){
     $delete->bindValue(':ID_film',$_GET['ID']);
     $delete->execute();
     $_SESSION['flash'] = "Suppression effectuée";
-        header('Location: editer_film.php?ID='.$film['ID']);
+        header('Location: editer_film.php?ID='.$film['ID_film']);
         die;
 }
 ?>
@@ -207,9 +207,9 @@ if(isset($_POST['delete_producteur'])){
           <?php foreach($genres_film as $genre):?>
             <ul>
             <li>
-            <?=$genre['genre']?>
+            <?=$genre['types']?>
             <form method="post">
-                <button type="submit" name="delete_genre" value="<?= $genre['ID']?>">Delete</button>
+                <button type="submit" name="delete_genre" value="<?= $genre['ID_genre']?>">Delete</button>
             </form>
             </li>
             </ul>
