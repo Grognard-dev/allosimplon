@@ -89,7 +89,6 @@ if(isset($_POST['ajout_genre'])){
     $requete_ajout->bindValue(':ID_film', $_GET['ID']);
     $requete_ajout->execute();
      $_SESSION['flash'] = "Ajout effectué";
-        header('Location: editer_film.php?ID='.$film['ID_film']);
         die;
 }
 $requete_realisateurs = $dbh->prepare("
