@@ -80,9 +80,14 @@ require_once 'styleswitcher.php';
     var easter_egg = new Konami(function() {
       var conteneur = document.querySelector("#conteneur")
       conteneur.style.display="block"
+      var player = document.querySelector('#audioPlayer');
+      player.play();
     });
   </script>
-    <div id="conteneur"><div id="bouge"><img src="img/tank.gif" alt=""></div></div>
+     <div id="conteneur"><div id="bouge"><img src="img/deathstar.gif" alt=""><audio id="audioPlayer">
+    <source src="son.ogg">
+    <source src="son.mp3">
+</audio></div>
     <script type="text/javascript" src="slick\slick\slick.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
