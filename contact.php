@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+
 if (isset($_POST['bouton'])){
     
     $nom = empty($_POST['nom_user']) ? null : $_POST['nom_user'];

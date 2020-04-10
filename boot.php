@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 
 require "library.php";
 
-
+$erreur = null;
 $flash = null;
 if(isset($_SESSION['flash']) ){
     $flash = $_SESSION['flash'];

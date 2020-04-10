@@ -1,15 +1,10 @@
 <?php
-ini_set("display_errors","1");
-error_reporting(E_ALL);
+
+require "boot.php";
+$dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
 header('Content-type: text/html; charset=utf-8');
 require_once 'styleswitcher.php';
 
-$config = require "config.php";
-
-$dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
-$erreur = null;
- 
-  
 if (isset($_POST['bouton'])){
     $pseudo_user = empty($_POST['pseudo_user']) ? null : $_POST['pseudo_user'];
     $password_user = empty($_POST['password_user']) ? null : $_POST['password_user'];

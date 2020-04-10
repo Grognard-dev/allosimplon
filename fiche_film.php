@@ -1,14 +1,6 @@
 <?php
-session_start();
-ini_set("display_errors","1");
-error_reporting(E_ALL);
-function e($string, $flags=ENT_QUOTES){
-    return htmlspecialchars ($string,$flags);
-}
-$config = require "config.php";
-
+require "boot.php";
 $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
-
 $liste = $dbh->prepare("SELECT * FROM Film WHERE ID_film = :ID");
 $liste->bindValue(':ID', $_GET['ID']);
 $liste->execute();

@@ -1,18 +1,6 @@
 <?php
-session_start();
+require "boot.php";
 require "securite.php";
-function e($string, $flags=ENT_QUOTES){
-    return htmlspecialchars ($string,$flags);
-}
-ini_set("display_errors","1");
-error_reporting(E_ALL);
-$erreur = null;
-$message = null;
-if(isset($_SESSION['flash']) ){
-    $message = $_SESSION['flash'];
-    unset($_SESSION['flash']);
-}
-$config = require "config.php";
 $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
 $edit=$dbh->prepare("SELECT * FROM Film WHERE ID_film = :ID");
 $edit->bindValue(':ID', $_GET['ID']);
@@ -89,6 +77,7 @@ if(isset($_POST['ajout_genre'])){
     $requete_ajout->bindValue(':ID_film', $_GET['ID']);
     $requete_ajout->execute();
      $_SESSION['flash'] = "Ajout effectué";
+      header('Location: editer_film.php?ID='.$film['ID_film']);
         die;
 }
 $requete_realisateurs = $dbh->prepare("
@@ -199,9 +188,6 @@ if(isset($_POST['delete_producteur'])){
 <?php if($erreur != null):?>
     <p><?=e($erreur)?></p>
     <?php endif?>
-    <?php if($message != null):?>
-        <p><?=e($message)?></p>
-        <?php endif?>
         </form>
           <?php foreach($genres_film as $genre):?>
             <ul>
@@ -306,7 +292,9 @@ if(isset($_POST['delete_producteur'])){
             </li>
             </ul>
             <?php endforeach ?>
+            <a href="liste_films.php?ID=<?=$_SESSION['ID']?>">Liste des films</a>
            <a href="https://lefevre.simplon-charleville.fr/allosimplon/catalogue.php?ID=<?=$_SESSION['ID']?>">Retour a la Gallerie</a>
+           
             
             </body>
             </html>

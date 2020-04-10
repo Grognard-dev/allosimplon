@@ -10,32 +10,32 @@ error_reporting(E_ALL);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Création d'acteur</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
     
     <form class="form-insert" action="insertion_acteur.php" method="POST" enctype="multipart/form-data">
-    <h2>Film acteur</h2>
-    <label class="form-titre"><b>Nom de l'Acteur</b></label><br>
-        <input class="form-champs" type="text"   name="Nom">
+    <h2 class="shadow .bg-center focus:shadow-outline focus:outline-none text-black font-bold py-2 px-4 rounded m-4 text-5xl">Insertion d'acteur</h2>
+    <label class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Nom de l'Acteur</b></label><br>
+        <input class="block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4" type="text"   name="Nom">
         <br>
-        <label class="form-titre"><b>Date de naissance</b></label><br>
-        <input class="form-champs" type="text"   name="Date_de_naissance">
+        <label class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Date de naissance</b></label><br>
+        <input class="block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4" type="text"   name="Date_de_naissance">
         <br>
-        <label class="form-titre"><b>Pays d'origine</b></label><br>
-        <input class="form-champs" type="text"  name="Pays_d_origine">
+        <label class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Pays d'origine</b></label><br>
+        <input class="block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4" type="text"  name="Pays_d_origine">
         <br>
-        <label class="form-titre"><b>biographie</b></label><br>
-        <textarea class="form-champs" rows="6" cols="100" name="biographie"></textarea>
+        <label class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>biographie</b></label><br>
+        <textarea class="block appearance-none w-1/2 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4" rows="6" cols="100" name="biographie"></textarea>
         <br>
-        <input class="form-champs" type="hidden" name="size" value="250000" />
-        <input class="form-champs" type="file" name="photo" size=20000000 />
+        <input  type="hidden" name="size" value="250000" />
+        <input  type="file" name="photo" size=20000000 />
         <div class="bouton">
-<button  type="submit" name="bouton" class="btn btn-primary mb-2">insérer</button>
+<button class="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"  type="submit" name="bouton" class="btn btn-primary mb-2">insérer</button>
 </div>
     </form>
     
-    <a class="form-champs" href="liste_acteur.php">Liste des Acteurs</a>
+    <a class="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4" href="liste_acteur.php">Liste des Acteurs</a>
 </body>
 </html>
 

@@ -20,6 +20,7 @@ require_once 'styleswitcher.php';
 
     <link rel="stylesheet" type="text/css" href="slick\slick\slick.css" />
     <link rel="stylesheet" type="text/css" href="slick\slick\slick-theme.css" />
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 
 
 

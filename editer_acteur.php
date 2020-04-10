@@ -1,22 +1,8 @@
 <?php
-session_start();
+require "boot.php";
 require "securite.php";
-function e($string, $flags=ENT_QUOTES){
-    return htmlspecialchars ($string,$flags);
-}
-ini_set("display_errors","1");
-error_reporting(E_ALL);
 $erreur = null;
-$message = null;
-if(isset($_SESSION['flash']) ){
-   $message = $_SESSION['flash'];
-   unset($_SESSION['flash']);
-}
-
-$config = require "config.php";
-
 $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
-
 $edit=$dbh->prepare("SELECT * FROM Acteur WHERE ID_acteur = :ID");
 $edit->bindValue(':ID', $_GET['ID']);
 $edit->execute();
@@ -110,9 +96,6 @@ if (isset($_POST['bouton'])){
 </div>
 <?php if($erreur != null):?>
   <p><?=e($erreur)?></p>
-<?php endif?>
-<?php if($message != null):?>
-  <p><?=e($message)?></p>
 <?php endif?>
 </form>
 <a href="liste_acteur.php">Liste des Acteurs</a>

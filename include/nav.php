@@ -64,7 +64,7 @@
             <input type="search" placeholder="Rechercher un film" name="search">
             <button class="search-button" type="submit"><i class="fa fa-search"></i></button>
         </form>
-        <div class="menu-dada">
+        <div class="menu-dada px-4 py-2 m-2">
             <ul>
 
                 <li>
@@ -80,20 +80,20 @@
                 <li>
                     <div class="style_ilayda"><a href="<?php echo $actuel; ?>?style=index.css"></a></div>
                 </li>
-                <li><a href="contact.php">Contact</a></li>
-                <li><a href="catalogue.php">Films</a></li>
+                <li px-4 py-2 m-2><a href="contact.php?ID=<?=$_SESSION["ID"]?>">Contact</a></li>
+                <li px-4 py-2 m-2><a href="catalogue.php?ID=<?=$_SESSION["ID"]?>">Films</a></li>
                 <?php if(isset($_SESSION["Pseudo"])): ?>
-                        <li><span>Bonjour <?php echo $_SESSION["Pseudo"];?></span>
+                        <li px-4 py-2 m-2><span>Bonjour <?php echo $_SESSION["Pseudo"];?></span>
                         <br>
                         <a href="logout.php">déconnexion</a>
                         <a href="user_compte.php?ID=<?=$_SESSION["ID"]?>">compte</a>
-                        </li>
+                        </li px-4 py-2 m-2>
                         <?php if(isset($_SESSION["is_admin"]) && $_SESSION["is_admin"]):?>
-                        <li><a href="admin.php">Admin</a></li>
+                        <li px-4 py-2 m-2><a href="admin.php">Admin</a></li>
                         <?php endif?>
                 <?php else:?>
-                        <li><a href="inscription.php">S'inscrire </a></li>
-                        <li><a href="connexion.php">Se connecter</a></li>
+                        <li px-4 py-2 m-2><a href="inscription.php">S'inscrire </a></li>
+                        <li px-4 py-2 m-2><a href="connexion.php">Se connecter</a></li>
                 <?php endif?>
             </ul>
         </div>

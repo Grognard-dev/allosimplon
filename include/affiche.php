@@ -18,7 +18,7 @@ $films = $liste->fetchAll();
 
 <div class="center slider">
     <?php foreach($films as $film):?>
-    <a href="fiche_film.php?ID=<?=$film['ID']?>"><img src="affiche/<?=$film["Affiche"]?>" alt=""></a>
+    <a href="fiche_film.php?ID=<?=$film['ID_film']?>"><img class="h-64 w-64" src="affiche/<?=$film["Affiche"]?>" alt=""></a>
     <?php endforeach?>
  </div>
 

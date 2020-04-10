@@ -4,7 +4,7 @@
 <div class="parallax-window" data-parallax="scroll" data-z-index="1" data-image-src="img\parallax.jpeg"></div>
 <!--IMG + TXT -->
 
-<div class="img-txt">
+<div class="img-txt ">
     <img src="./img/imgtxt.png" alt="">
     <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquid illum in optio placeat porro
         ipsam

@@ -41,6 +41,46 @@ try{
             }
             
             //==========================================================
+            //   insertion de plusieur acteur 
+            //==========================================================
+            
+            if(isset($_POST['Nom'])){
+                $insert_acteur = $dbh->prepare("INSERT INTO joue (ID_Acteur,ID_film) VALUES (:ID_Acteur,:ID_film)");
+                foreach($_POST['Nom'] as $acteur){
+                    $insert_acteur->bindValue(':ID_Acteur',$acteur);
+                    $insert_acteur->bindValue(':ID_film',$ID_Film);
+                    $insert_acteur->execute();
+                }
+            }
+            
+            //==========================================================
+            //   insertion de plusieur Producteur 
+            //==========================================================
+            
+            if(isset($_POST['Nom_producteur'])){
+                $insert_producteur = $dbh->prepare("INSERT INTO produit (ID_Producteur,ID_film) VALUES (:ID_Producteur,:ID_film)");
+                foreach($_POST['Nom_producteur'] as $producteur){
+                    $insert_producteur->bindValue(':ID_Producteur',$producteur);
+                    $insert_producteur->bindValue(':ID_film',$ID_Film);
+                    $insert_producteur->execute();
+                }
+            }
+
+            //==========================================================
+            //   insertion de plusieur Realisateur 
+            //==========================================================
+            
+            if(isset($_POST['Nom_realisateur'])){
+                $insert_realisateur = $dbh->prepare("INSERT INTO realise (ID_realisateur,ID_Film) VALUES (:ID_realisateur,:ID_Film)");
+                foreach($_POST['Nom_realisateur'] as $realisateur){
+                    $insert_realisateur->bindValue(':ID_realisateur',$realisateur);
+                    $insert_realisateur->bindValue(':ID_Film',$ID_Film);
+                    $insert_realisateur->execute();
+                }
+            }
+            
+            
+            //==========================================================
             //   insertion de l'Affiche
             //==========================================================
             if (isset($_FILES['Affiche']))
@@ -99,171 +139,171 @@ $producteurs_film = $requete_producteurs->fetchAll();
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>insertion film</title>
-<link rel="stylesheet" href="css/style.css">
+<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
 
 <?php flash();?>
-    <form action="insertion_film.php" method="POST" enctype="multipart/form-data">
-    <h2>Film insertion</h2>
+<form action="insertion_film.php" method="POST" enctype="multipart/form-data">
+<h2 class="shadow .bg-center focus:shadow-outline focus:outline-none text-black font-bold py-2 px-4 rounded m-4 text-5xl">Page d'insertion de films</h2>
+
+<label class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Nom du film</b></label><br>
+<input class="block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4"  type="text" placeholder="Nom du film" name="Nom_du_film" required> <br>
+
+<label class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Date de sortie</b></label><br>
+<input class="block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4 "  type="text" placeholder="Date de sortie" name="Date_de_sortie" required> <br>
+
+<label class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>synopsis</b></label><br>
+<textarea class="block appearance-none w-1/2 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4 " rows="6" cols="100" name="synopsis" required></textarea> <br>
+
+<input class="form-champs" type="hidden" name="size" value="2000000" />
+<input class="form-champs" type="file" name="Affiche" size=2000 />
+
+<h2 class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4">Acteurs</h2>
+<div id="acteur">
+
+</div>
+<button id="ajout_acteur" type="button" class="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4">ajout acteur</button>
+
+
+
+<h2 class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4">Genre</h2>
+<div id="types">
+
+</div>
+<button id="ajout_genre" type="button" class="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4">ajout genre</button>
+<br>
+
+
+<h2 class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4">Producteur</h2>
+<div id="producteur">
+
+</div>
+<button id="ajout_producteur" type="button" class="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4">ajout Producteur</button>
+<br>
+
+
+<h2 class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4">Realisateur</h2>
+<div id="realisateur">
+
+</div>
+<button id="ajout_realisateur" type="button" class="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4">ajout Realisateur</button>
+<br>
+
+<div class="bouton">
+<button type="submit" name="bouton" class="shadow bg-purple-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4">insérer</button>
+</div>
+
+</form>
+<a class="shadow bg-purple-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4" href="liste_films.php">Liste des films</a>
+
+<select style="display: none" id="acteur_select_tpl" class="block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4">
+<option value=""></option>
+<?php foreach($acteurs_film as $acteur): ?>
+    <option value="<?= $acteur['ID_acteur']?>"><?=$acteur['Nom']?></option>
+    <?php endforeach ?>
+    </select>
     
-    <label class="form-titre"><b>Nom du film</b></label><br>
-    <input class="form-champs" class="login" type="text" placeholder="Nom du film" name="Nom_du_film" required> <br>
-    
-    <label class="form-titre"><b>Date de sortie</b></label><br>
-    <input class="form-champs" class="login" type="text" placeholder="Date de sortie" name="Date_de_sortie" required> <br>
-    
-    <label class="form-titre"><b>synopsis</b></label><br>
-    <textarea class="form-champs" rows="6" cols="100" name="synopsis" required></textarea> <br>
-    
-    <input class="form-champs" type="hidden" name="size" value="2000000" />
-    <input class="form-champs" type="file" name="Affiche" size=2000 />
-    
-    <h2>Acteurs</h2>
-    <div id="acteur">
-    
-    </div>
-    <button id="ajout_acteur" type="button">ajout acteur</button>
-    
-    
-    
-    <h2>Genre</h2>
-    <div id="types">
-    
-    </div>
-    <button id="ajout_genre" type="button">ajout genre</button>
-    <br>
-    
-    
-    <h2>Producteur</h2>
-    <div id="producteur">
-    
-    </div>
-    <button id="ajout_producteur" type="button">ajout Producteur</button>
-    <br>
-    
-    
-    <h2>Realisateur</h2>
-    <div id="realisateur">
-    
-    </div>
-    <button id="ajout_realisateur" type="button">ajout Realisateur</button>
-    <br>
-    
-    <div class="bouton">
-    <button type="submit" name="bouton" class="btn btn-primary mb-2">insérer</button>
-    </div>
-    
-    </form>
-    <a href="liste_films.php">Liste des films</a>
-    
-    <select style="display: none" id="acteur_select_tpl">
+    <select style="display: none" id="genre_select_tpl" class="block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4">
     <option value=""></option>
-    <?php foreach($acteurs_film as $acteur): ?>
-        <option value="<?= $acteur['ID_acteur']?>"><?=$acteur['Nom']?></option>
+    <?php foreach($genres_film as $genre): ?>
+        <option value="<?= $genre['ID_genre']?>"><?=$genre['types']?></option>
         <?php endforeach ?>
         </select>
         
-        <select style="display: none" id="genre_select_tpl">
+        <select style="display: none" id="producteur_select_tpl" class="block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4">
         <option value=""></option>
-        <?php foreach($genres_film as $genre): ?>
-            <option value="<?= $genre['ID_genre']?>"><?=$genre['types']?></option>
+        <?php foreach($producteurs_film as $producteur): ?>
+            <option value="<?= $producteur['ID_producteur']?>"><?=$producteur['Nom']?></option>
             <?php endforeach ?>
             </select>
             
-            <select style="display: none" id="producteur_select_tpl">
+            <select style="display: none" id="realisateur_select_tpl" class="block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4"> 
             <option value=""></option>
-            <?php foreach($producteurs_film as $producteur): ?>
-                <option value="<?= $producteur['ID_producteur']?>"><?=$producteur['Nom']?></option>
+            <?php foreach($realisateurs_film as $realisateur): ?>
+                <option value="<?= $realisateur['ID_realisateur']?>"><?=$realisateur['Nom']?></option>
                 <?php endforeach ?>
                 </select>
                 
-                <select style="display: none" id="realisateur_select_tpl">
-                <option value=""></option>
-                <?php foreach($realisateurs_film as $realisateur): ?>
-                    <option value="<?= $realisateur['ID_realisateur']?>"><?=$realisateur['Nom']?></option>
-                    <?php endforeach ?>
-                    </select>
+                <script>
+                var ajout_acteur = document.getElementById('ajout_acteur');
+                var acteur = document.getElementById('acteur');
+                var acteur_select_tpl = document.getElementById('acteur_select_tpl');
+                var index = 0;
+                
+                ajout_acteur.addEventListener('click', function(){
+                    var divacteur = document.createElement('div');
+                    divacteur.className = 'acteur';
                     
-                    <script>
-                    var ajout_acteur = document.getElementById('ajout_acteur');
-                    var acteur = document.getElementById('acteur');
-                    var acteur_select_tpl = document.getElementById('acteur_select_tpl');
-                    var index = 0;
+                    var selectacteur = acteur_select_tpl.cloneNode(true);
+                    selectacteur.id = 'acteur' + index;
+                    selectacteur.style.display = 'block';
+                    selectacteur.name = 'Nom[' + index + ']';
+                    divacteur.appendChild(selectacteur);
+                    acteur.appendChild(divacteur);
                     
-                    ajout_acteur.addEventListener('click', function(){
-                        var divacteur = document.createElement('div');
-                        divacteur.className = 'acteur';
-                        
-                        var selectacteur = acteur_select_tpl.cloneNode(true);
-                        selectacteur.id = 'acteur' + index;
-                        selectacteur.style.display = 'block';
-                        selectacteur.name = 'Nom[' + index + ']';
-                        divacteur.appendChild(selectacteur);
-                        acteur.appendChild(divacteur);
-                        
-                        index = index + 1;
-                    });
+                    index = index + 1;
+                });
+                
+                var ajout_genre = document.getElementById('ajout_genre');
+                var genres = document.getElementById('types');
+                var genre_select_tpl = document.getElementById('genre_select_tpl');
+                var index = 0;
+                
+                ajout_genre.addEventListener('click', function(){
+                    var divgenre = document.createElement('div');
+                    divgenre.className = 'genre';
                     
-                    var ajout_genre = document.getElementById('ajout_genre');
-                    var genres = document.getElementById('types');
-                    var genre_select_tpl = document.getElementById('genre_select_tpl');
-                    var index = 0;
+                    var selectgenre = genre_select_tpl.cloneNode(true);
+                    selectgenre.id = 'genre' + index;
+                    selectgenre.style.display = 'block';
+                    selectgenre.name = 'types[' + index + ']';
+                    divgenre.appendChild(selectgenre);
+                    genres.appendChild(divgenre);
                     
-                    ajout_genre.addEventListener('click', function(){
-                        var divgenre = document.createElement('div');
-                        divgenre.className = 'genre';
-                        
-                        var selectgenre = genre_select_tpl.cloneNode(true);
-                        selectgenre.id = 'genre' + index;
-                        selectgenre.style.display = 'block';
-                        selectgenre.name = 'types[' + index + ']';
-                        divgenre.appendChild(selectgenre);
-                        genres.appendChild(divgenre);
-                        
-                        index = index + 1;
-                    });
+                    index = index + 1;
+                });
+                
+                var ajout_producteur = document.getElementById('ajout_producteur');
+                var producteur = document.getElementById('producteur');
+                var producteur_select_tpl = document.getElementById('producteur_select_tpl');
+                var index = 0;
+                
+                ajout_producteur.addEventListener('click', function(){
+                    var divproducteur = document.createElement('div');
+                    divproducteur.className = 'producteur';
                     
-                    var ajout_producteur = document.getElementById('ajout_producteur');
-                    var producteur = document.getElementById('producteur');
-                    var producteur_select_tpl = document.getElementById('producteur_select_tpl');
-                    var index = 0;
+                    var selectproducteur = producteur_select_tpl.cloneNode(true);
+                    selectproducteur.id = 'producteur' + index;
+                    selectproducteur.style.display = 'block';
+                    selectproducteur.name = 'Nom_producteur[' + index + ']';
+                    divproducteur.appendChild(selectproducteur);
+                    producteur.appendChild(divproducteur);
                     
-                    ajout_producteur.addEventListener('click', function(){
-                        var divproducteur = document.createElement('div');
-                        divproducteur.className = 'producteur';
-                        
-                        var selectproducteur = producteur_select_tpl.cloneNode(true);
-                        selectproducteur.id = 'producteur' + index;
-                        selectproducteur.style.display = 'block';
-                        selectproducteur.name = 'Nom[' + index + ']';
-                        divproducteur.appendChild(selectproducteur);
-                        producteur.appendChild(divproducteur);
-                        
-                        index = index + 1;
-                    });
+                    index = index + 1;
+                });
+                
+                var ajout_realisateur = document.getElementById('ajout_realisateur');
+                var realisateur = document.getElementById('realisateur');
+                var realisateur_select_tpl = document.getElementById('realisateur_select_tpl');
+                var index = 0;
+                
+                ajout_realisateur.addEventListener('click', function(){
+                    var divrealisateur = document.createElement('div');
+                    divrealisateur.className = 'realisateur';
                     
-                    var ajout_realisateur = document.getElementById('ajout_realisateur');
-                    var realisateur = document.getElementById('realisateur');
-                    var realisateur_select_tpl = document.getElementById('realisateur_select_tpl');
-                    var index = 0;
+                    var selectrealisateur = realisateur_select_tpl.cloneNode(true);
+                    selectrealisateur.id = 'realisateur' + index;
+                    selectrealisateur.style.display = 'block';
+                    selectrealisateur.name = 'Nom_realisateur[' + index + ']';
+                    divrealisateur.appendChild(selectrealisateur);
+                    realisateur.appendChild(divrealisateur);
                     
-                    ajout_realisateur.addEventListener('click', function(){
-                        var divrealisateur = document.createElement('div');
-                        divrealisateur.className = 'realisateur';
-                        
-                        var selectrealisateur = realisateur_select_tpl.cloneNode(true);
-                        selectrealisateur.id = 'realisateur' + index;
-                        selectrealisateur.style.display = 'block';
-                        selectrealisateur.name = 'Nom[' + index + ']';
-                        divrealisateur.appendChild(selectrealisateur);
-                        realisateur.appendChild(divrealisateur);
-                        
-                        index = index + 1;
-                    });
-                    </script>
-                    </body>
-                    </html>
-                    
-                    
-                    
+                    index = index + 1;
+                });
+                </script>
+                </body>
+                </html>
+                
+                
+                

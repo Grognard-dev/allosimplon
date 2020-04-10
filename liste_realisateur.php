@@ -1,12 +1,6 @@
 <?php
-session_start();
-function e($string, $flags=ENT_QUOTES){
-    return htmlspecialchars ($string,$flags);
-}
-ini_set("display_errors","1");
-error_reporting(E_ALL);
-
-$config = require "config.php";
+require "boot.php";
+require "securite.php";
 
 $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
 

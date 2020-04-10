@@ -21,6 +21,7 @@ require_once 'styleswitcher.php';
 
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" media="screen, projection" type="text/css" id="css" href="<?php echo $url; ?>" />
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 
 
     <!--GOOGLE FONTS-->
@@ -70,11 +71,11 @@ $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
 
 <section id="search-result">
 
-    <ul class="result-list">
+    <ul class="result-list m-6">
         <?php if($req->rowCount()>0): ?>
             <h3>Résultats de votre recherche</h3>
         <?php while ($s = $req->fetch()): ?>
-            <li><a href="fiche_film.php?ID=<?=$s['ID_film']?>"><?=$s['Nom_du_film']?></a></li>
+            <li><a class="text-yellow-500" href="fiche_film.php?ID=<?=$s['ID_film']?>"><?=$s['Nom_du_film']?></a></li>
         <?php endwhile ?>
         <?php else: ?>
             <h2>Aucun résultat</h2>

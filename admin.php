@@ -1,6 +1,7 @@
-<?php session_start();
-require "securite.php"
-
+<?php 
+require "boot.php";
+require "securite.php";
+$dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
 ?>
 <!DOCTYPE html>
 <html lang="en">
