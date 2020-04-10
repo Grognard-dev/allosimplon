@@ -65,7 +65,7 @@ try{
                     $insert_producteur->execute();
                 }
             }
-
+            
             //==========================================================
             //   insertion de plusieur Realisateur 
             //==========================================================
@@ -87,7 +87,24 @@ try{
             {  
                 if ($_FILES['Affiche']['size'] <= 2000000)
                 {  
-                    move_uploaded_file($_FILES['Affiche']['tmp_name'], 'affiche/' . $_FILES['Affiche']['name']);
+                    $chemin =  'affiche/' . $_FILES['Affiche']['name'];
+                    move_uploaded_file($_FILES['Affiche']['tmp_name'],$chemin);
+                    if($_FILES['Affiche']['type'] === 'image/jpeg'){
+                        $image = imagecreatefromjpeg($chemin);
+                    }elseif($_FILES['Affiche']['type'] === 'image/png'){
+                        $image = imagecreatefrompng($chemin);
+                    }else {
+                        $_SESSION['flash'] = " Pas le bon format d'image, format accepter jpeg,png";
+                        header('location: insertion_film.php');
+                        die;
+                    }
+                    $return_image = imagescale($image,350);
+                    if($_FILES['Affiche']['type'] === 'image/jpeg'){
+                        imagejpeg($return_image,$chemin);
+                    }elseif($_FILES['Affiche']['type'] === 'image/png'){
+                        imagepng($return_image,$chemin);
+                    }
+                    
                     $requete = $dbh->prepare("UPDATE Film SET Affiche = :Affiche WHERE ID_film = :ID ");
                     $requete->bindValue(':ID', $ID_Film);
                     $requete->bindValue(':Affiche', $_FILES['Affiche']['name']);
@@ -140,14 +157,16 @@ $producteurs_film = $requete_producteurs->fetchAll();
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>insertion film</title>
 <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<?php flash();?>
+
 <form action="insertion_film.php" method="POST" enctype="multipart/form-data">
 <h2 class="shadow .bg-center focus:shadow-outline focus:outline-none text-black font-bold py-2 px-4 rounded m-4 text-5xl">Page d'insertion de films</h2>
+<?php flash();?>
 
-<label class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Nom du film</b></label><br>
+<label class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4 "><b>Nom du film</b></label><br>
 <input class="block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4"  type="text" placeholder="Nom du film" name="Nom_du_film" required> <br>
 
 <label class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Date de sortie</b></label><br>
@@ -159,7 +178,7 @@ $producteurs_film = $requete_producteurs->fetchAll();
 <input class="form-champs" type="hidden" name="size" value="2000000" />
 <input class="form-champs" type="file" name="Affiche" size=2000 />
 
-<h2 class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4">Acteurs</h2>
+<h2 class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4 max-w-titre">Acteurs</h2>
 <div id="acteur">
 
 </div>
@@ -167,7 +186,7 @@ $producteurs_film = $requete_producteurs->fetchAll();
 
 
 
-<h2 class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4">Genre</h2>
+<h2 class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4 max-w-titre" >Genre</h2>
 <div id="types">
 
 </div>
@@ -175,7 +194,7 @@ $producteurs_film = $requete_producteurs->fetchAll();
 <br>
 
 
-<h2 class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4">Producteur</h2>
+<h2 class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4 max-w-titre">Producteur</h2>
 <div id="producteur">
 
 </div>
@@ -183,7 +202,7 @@ $producteurs_film = $requete_producteurs->fetchAll();
 <br>
 
 
-<h2 class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4">Realisateur</h2>
+<h2 class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4 max-w-titre">Realisateur</h2>
 <div id="realisateur">
 
 </div>
