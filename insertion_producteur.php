@@ -15,26 +15,26 @@ require "securite.php";
     
     <form action="insertion_producteur.php" method="POST" enctype="multipart/form-data">
     <h2 class="shadow .bg-center focus:shadow-outline focus:outline-none text-black font-bold py-2 px-4 rounded m-4 text-5xl">Insertion Producteur</h2>
-        <label class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Nom du Producteur</b></label><br>
+        <label class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4 "><b>Nom du Producteur</b></label><br>
         <input class="block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4" type="text"  name="Nom">
         <br>
-        <label class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Date de naissance</b></label><br>
+        <label class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4 "><b>Date de naissance</b></label><br>
         <input class="block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4" type="text"  name="Date_de_naissance">
         <br>
-        <label class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Pays d'origine</b></label><br>
+        <label class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4 "><b>Pays d'origine</b></label><br>
         <input class="block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4" type="text"   name="Pays_d_origine">
         <br>
-        <label class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>biographie</b></label><br>
+        <label class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4 "><b>biographie</b></label><br>
         <textarea class="block appearance-none w-1/2 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4" rows="6" cols="100" name="biographie"></textarea>
         <br>
         <input  type="hidden" name="size" value="250000" />
         <input  type="file" name="photo" size=20000000 />
         <div class="bouton">
-<button class="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4" type="submit" name="bouton" class="btn btn-primary mb-2">insérer</button>
+<button class="shadow bg-purple-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4" type="submit" name="bouton" class="btn btn-primary mb-2">insérer</button>
 </div>
     </form>
     
-    <a class="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4" href="liste_producteur.php">Liste des Producteurs</a>
+    <a class="shadow bg-purple-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4" href="liste_producteur.php">Liste des Producteurs</a>
 </body>
 </html>
 
@@ -64,11 +64,34 @@ if (isset($_POST['bouton'])){
 }
 $ID = $dbh->lastInsertId();
 
-if (isset($_FILES['photo']))
+if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK)
 {  
     if ($_FILES['photo']['size'] <= 250000)
     {  
+        $chemin =  'photoproducteur/' . $_FILES['photo']['name'];
         move_uploaded_file($_FILES['photo']['tmp_name'], 'photoproducteur/' . $_FILES['photo']['name']);
+         if($_FILES['photo']['type'] === 'image/jpeg'){
+                        $image = @imagecreatefromjpeg($chemin);
+                    }elseif($_FILES['photo']['type'] === 'image/png'){
+                        $image = @imagecreatefrompng($chemin);
+                    }else {
+                         unlink($chemin);
+                        $_SESSION['flash'] = " Pas le bon format d'image, format accepter jpeg,png";
+                         header('location: insertion_producteur.php');
+                        die;
+                    }
+                    if($image === false){
+                        unlink($chemin);
+                        $_SESSION['flash'] = "Erreur de conversion d'image";
+                          header('location: insertion_producteur.php');
+                        die;
+                    }
+                    $return_image = imagescale($image,350);
+                    if($_FILES['photo']['type'] === 'image/jpeg'){
+                        imagejpeg($return_image,$chemin);
+                    }elseif($_FILES['photo']['type'] === 'image/png'){
+                        imagepng($return_image,$chemin);
+                    }
         $requete = $dbh->prepare("UPDATE Producteur SET photo = :photo WHERE ID_producteur = :ID ");
         $requete->bindValue(':ID', $ID);
         $requete->bindValue(':photo', $_FILES['photo']['name']);

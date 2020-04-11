@@ -81,7 +81,7 @@
                     <div class="style_ilayda"><a href="<?php echo $actuel; ?>?style=index.css"></a></div>
                 </li>
                 <li px-4 py-2 m-2><a href="contact.php?ID=<?=$_SESSION["ID"]?>">Contact</a></li>
-                <li px-4 py-2 m-2><a href="catalogue.php?ID=<?=$_SESSION["ID"]?>">Films</a></li>
+                <li px-4 py-2 m-2><a href="catalogue.php">Films</a></li>
                 <?php if(isset($_SESSION["Pseudo"])): ?>
                         <li px-4 py-2 m-2><span>Bonjour <?php echo $_SESSION["Pseudo"];?></span>
                         <br>

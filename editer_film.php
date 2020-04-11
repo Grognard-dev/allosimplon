@@ -14,11 +14,34 @@ if (isset($_POST['bouton'])){
     if ($Nom_du_film === null || $Date_de_sortie === null  || $synopsis === null) {
         $erreur = 'Veuillez remplir tous les champs';
     }else {
-        if (isset($_FILES['Affiche']))
+        if (isset($_FILES['Affiche']) && $_FILES['Affiche']['error'] === UPLOAD_ERR_OK)
         {  
             if ($_FILES['Affiche']['size'] <= 250000)
             {  
+                $chemin =  'affiche/' . $_FILES['Affiche']['name'];
                 move_uploaded_file($_FILES['Affiche']['tmp_name'], 'affiche/' . $_FILES['Affiche']['name']);
+                if($_FILES['Affiche']['type'] === 'image/jpeg'){
+                        $image = @imagecreatefromjpeg($chemin);
+                    }elseif($_FILES['Affiche']['type'] === 'image/png'){
+                        $image = @imagecreatefrompng($chemin);
+                    }else {
+                         unlink($chemin);
+                        $_SESSION['flash'] = " Pas le bon format d'image, format accepter jpeg,png";
+                         header('Location: editer_film.php?ID='.$film['ID_film']);
+                        die;
+                    }
+                    if($image === false){
+                        unlink($chemin);
+                        $_SESSION['flash'] = "Erreur de conversion d'image";
+                         header('Location: editer_film.php?ID='.$film['ID_film']);
+                        die;
+                    }
+                    $return_image = imagescale($image,350);
+                    if($_FILES['Affiche']['type'] === 'image/jpeg'){
+                        imagejpeg($return_image,$chemin);
+                    }elseif($_FILES['Affiche']['type'] === 'image/png'){
+                        imagepng($return_image,$chemin);
+                    }
                 $requete = $dbh->prepare("UPDATE Film SET Affiche = :Affiche WHERE ID_film = :ID ");
                 $requete->bindValue(':ID',$_GET['ID'] );
                 $requete->bindValue(':Affiche', $_FILES['Affiche']['name']);

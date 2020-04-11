@@ -83,19 +83,26 @@ try{
             //==========================================================
             //   insertion de l'Affiche
             //==========================================================
-            if (isset($_FILES['Affiche']))
+            if (isset($_FILES['Affiche']) && $_FILES['Affiche']['error'] === UPLOAD_ERR_OK)
             {  
                 if ($_FILES['Affiche']['size'] <= 2000000)
                 {  
                     $chemin =  'affiche/' . $_FILES['Affiche']['name'];
                     move_uploaded_file($_FILES['Affiche']['tmp_name'],$chemin);
                     if($_FILES['Affiche']['type'] === 'image/jpeg'){
-                        $image = imagecreatefromjpeg($chemin);
+                        $image = @imagecreatefromjpeg($chemin);
                     }elseif($_FILES['Affiche']['type'] === 'image/png'){
-                        $image = imagecreatefrompng($chemin);
+                        $image = @imagecreatefrompng($chemin);
                     }else {
+                         unlink($chemin);
                         $_SESSION['flash'] = " Pas le bon format d'image, format accepter jpeg,png";
                         header('location: insertion_film.php');
+                        die;
+                    }
+                    if($image === false){
+                        unlink($chemin);
+                        $_SESSION['flash'] = "Erreur de conversion d'image";
+                        header("location: insertion_film.php");
                         die;
                     }
                     $return_image = imagescale($image,350);
@@ -166,19 +173,19 @@ $producteurs_film = $requete_producteurs->fetchAll();
 <h2 class="shadow .bg-center focus:shadow-outline focus:outline-none text-black font-bold py-2 px-4 rounded m-4 text-5xl">Page d'insertion de films</h2>
 <?php flash();?>
 
-<label class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4 "><b>Nom du film</b></label><br>
+<label class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4 "><b>Nom du film</b></label><br>
 <input class="block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4"  type="text" placeholder="Nom du film" name="Nom_du_film" required> <br>
 
-<label class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Date de sortie</b></label><br>
+<label class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Date de sortie</b></label><br>
 <input class="block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4 "  type="text" placeholder="Date de sortie" name="Date_de_sortie" required> <br>
 
-<label class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>synopsis</b></label><br>
+<label class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>synopsis</b></label><br>
 <textarea class="block appearance-none w-1/2 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4 " rows="6" cols="100" name="synopsis" required></textarea> <br>
 
 <input class="form-champs" type="hidden" name="size" value="2000000" />
 <input class="form-champs" type="file" name="Affiche" size=2000 />
 
-<h2 class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4 max-w-titre">Acteurs</h2>
+<h2 class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4 max-w-titre">Acteurs</h2>
 <div id="acteur">
 
 </div>
@@ -186,7 +193,7 @@ $producteurs_film = $requete_producteurs->fetchAll();
 
 
 
-<h2 class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4 max-w-titre" >Genre</h2>
+<h2 class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4 max-w-titre" >Genre</h2>
 <div id="types">
 
 </div>
@@ -194,7 +201,7 @@ $producteurs_film = $requete_producteurs->fetchAll();
 <br>
 
 
-<h2 class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4 max-w-titre">Producteur</h2>
+<h2 class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4 max-w-titre">Producteur</h2>
 <div id="producteur">
 
 </div>
@@ -202,7 +209,7 @@ $producteurs_film = $requete_producteurs->fetchAll();
 <br>
 
 
-<h2 class="shadow bg-blue-500 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4 max-w-titre">Realisateur</h2>
+<h2 class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4 max-w-titre">Realisateur</h2>
 <div id="realisateur">
 
 </div>

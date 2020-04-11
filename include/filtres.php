@@ -11,82 +11,27 @@
         <h5 class="axelH5">Filtres</h5>
         <h5 class="axelgenre">Genre</h5>
         <div class="axelcase">
-            <input type="checkbox" id="coding" name="" value="">
-            <label for="coding">SF</label>
+            <input type="checkbox" id="science_fiction" name="science_fiction" value="">
+            <label for="">Science-Fiction</label>
         </div>
         <div class="axelcase">
-            <input type="checkbox" id="" name="" value="">
-            <label for="">Aventure</label>
-        </div>
-        <div class="axelcase">
-            <input type="checkbox" id="" name="" value="">
+            <input type="checkbox" id="action" name="action" value="">
             <label for="">Action</label>
         </div>
         <div class="axelcase">
-            <input type="checkbox" id="" name="" value="">
-            <label for="">Animation</label>
-        </div>
-        <div class="axelcase">
-            <input type="checkbox" id="" name="" value="">
+            <input type="checkbox" id="drole" name="drole" value="">
             <label for="">Comedie</label>
         </div>
         <div class="axelcase">
-            <input type="checkbox" id="" name="" value="">
-            <label for="">Doc Fiction</label>
+            <input type="checkbox" id="romance" name="romance" value="">
+            <label for="">Romantique</label>
         </div>
         <div class="axelcase">
-            <input type="checkbox" id="" name="" value="">
-            <label for="">Drame</label>
-        </div>
-        <div class="axelcase">
-            <input type="checkbox" id="" name="" value="">
+            <input type="checkbox" id="horreur" name="horreur" value="">
             <label for="">Horreur</label>
         </div>
         <div class="axelcase">
-            <input type="checkbox" id="" name="" value="">
-            <label for="">Policier</label>
-        </div>
-        <div class="axelcase">
-            <input type="checkbox" id="" name="" value="">
-            <label for="">Romance</label>
-        </div>
-        <div class="axelcase">
-            <input type="checkbox" id="" name="" value="">
-            <label for="">Thriller</label>
-        </div>
-        <h5 class="axelgenre">Durée</h5>
-        <div class="axelcase">
-            <input type="checkbox" id="" name="" value="">
-            <label for="">moins d'1h30</label>
-        </div>
-        <div class="axelcase">
-            <input type="checkbox" id="" name="" value="">
-            <label for="">plus d'1h30</label>
-        </div>
-        <div class="axelcase">
-            <input type="checkbox" id="" name="" value="">
-            <label for="">Plus d'2h</label>
-        </div>
-
-        <h5 class="axelgenre">Note</h5>
-        <div class="axelcase">
-            <input type="checkbox" id="coding" name="" value="">
-            <label for="coding">5/5</label>
-        </div>
-        <div class="axelcase">
-            <input type="checkbox" id="coding" name="" value="">
-            <label for="coding">4/5</label>
-        </div>
-        <div class="axelcase">
-            <input type="checkbox" id="coding" name="" value="">
-            <label for="coding">3/5</label>
-        </div>
-        <div class="axelcase">
-            <input type="checkbox" id="coding" name="" value="">
-            <label for="coding">2/5</label>
-        </div>
-        <div class="axelcase">
-            <input type="checkbox" id="coding" name="" value="">
-            <label for="coding">1/5</label>
+            <input type="checkbox" id="dramatique" name="dramatique" value="">
+            <label for="">Drame</label>
         </div>
     </div>

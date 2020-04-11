@@ -19,11 +19,34 @@ if (isset($_POST['bouton'])){
         }else {
 
             
-            if (isset($_FILES['photo']))
+            if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK)
             {  
                 if ($_FILES['photo']['size'] <= 250000)
                 {  
+                    $chemin =  'photoproducteur/' . $_FILES['photo']['name'];
                     move_uploaded_file($_FILES['photo']['tmp_name'], 'photoproducteur/' . $_FILES['photo']['name']);
+                     if($_FILES['photo']['type'] === 'image/jpeg'){
+                        $image = @imagecreatefromjpeg($chemin);
+                    }elseif($_FILES['photo']['type'] === 'image/png'){
+                        $image = @imagecreatefrompng($chemin);
+                    }else {
+                         unlink($chemin);
+                        $_SESSION['flash'] = " Pas le bon format d'image, format accepter jpeg,png";
+                         header('Location: editer_producteur.php?ID='.$producteurs['ID']);
+                        die;
+                    }
+                    if($image === false){
+                        unlink($chemin);
+                        $_SESSION['flash'] = "Erreur de conversion d'image";
+                          header('Location: editer_producteur.php?ID='.$producteurs['ID']);
+                        die;
+                    }
+                    $return_image = imagescale($image,350);
+                    if($_FILES['photo']['type'] === 'image/jpeg'){
+                        imagejpeg($return_image,$chemin);
+                    }elseif($_FILES['photo']['type'] === 'image/png'){
+                        imagepng($return_image,$chemin);
+                    }
                     $requete = $dbh->prepare("UPDATE Producteur SET photo = :photo WHERE ID_producteur = :ID ");
                     $requete->bindValue(':ID',$_GET['ID'] );
                     $requete->bindValue(':photo', $_FILES['photo']['name']);
