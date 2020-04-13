@@ -4,8 +4,6 @@ $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
 $liste = $dbh->prepare("SELECT * FROM Film");
 $liste->execute();
 $films = $liste->fetchAll();
-
-
 ?>
 
     <div class="flex justify-center flex-wrap">
@@ -24,7 +22,10 @@ $films = $liste->fetchAll();
     <a class="text-orange-700 text-center bg-black px-4 py-2 m-2" class="ajouter_film" href="insertion_film.php">Ajouter un film</a>
     <?php endif ?>
     </div>
+
     
-    
+
+
+
     
     

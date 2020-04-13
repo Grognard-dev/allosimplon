@@ -1,13 +1,12 @@
 <!--NOS FILMS-->
 
-
 <h2 class="axeltitreh2">Nos films</h2>
 
 <div class="axelcontainer">
 
     <!--FILTRES-->
 
-    <div class="axelgauche">
+    <form class="axelgauche">
         <h5 class="axelH5">Filtres</h5>
         <h5 class="axelgenre">Genre</h5>
         <div class="axelcase">
@@ -34,4 +33,5 @@
             <input type="checkbox" id="dramatique" name="dramatique" value="">
             <label for="">Drame</label>
         </div>
-    </div>
+        <button type="submit" name="button">filtrer</button>
+    </form>
