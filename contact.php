@@ -41,6 +41,7 @@ require_once 'styleswitcher.php';
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/reset.css">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" media="screen, projection" type="text/css" id="css" href="<?php echo $url; ?>" />
     
 
@@ -74,20 +75,20 @@ require_once 'styleswitcher.php';
             <h2 class="contact">Contact</h2>
 
             
-            <label class="contact"><b>Nom d'utilisateur</b></label>
+            <label class="contact text-white"><b>Nom d'utilisateur</b></label>
             <input class="login" type="text"  name="nom_user" required> <br>
 
-            <label class="contact"><b>Prenom d'utilisateur</b></label>
+            <label class="contact text-white"><b>Prenom d'utilisateur</b></label>
             <input class="login" type="text" name="prenom_user" required> <br>
 
-            <label class="contact"><b>Email d'utilisateur</b></label>
+            <label class="contact text-white"><b>Email d'utilisateur</b></label>
             <input class="login" type="email"  name="email_user" required> <br>
 
-            <label class="contact"><b>Message</b></label>
+            <label class="contact text-white"><b>Message</b></label>
             <textarea rows="6" cols="100" name="user_message" value="Message" required></textarea><br>
 
-             <div class="bouton">
-                <button type="submit" name="bouton" class="btn btn-primary mb-2">Envoyer</button>
+             <div class="bouton text-white ">
+                <button class="bg-yellow-500 shadow  hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"ype="submit" name="bouton" class="btn btn-primary mb-2">Envoyer</button>
             </div>
             <?php echo "<span>$retour</span>"; ?>
 

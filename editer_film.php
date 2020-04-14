@@ -192,7 +192,7 @@ if(isset($_POST['delete_producteur'])){
 <input class="form-champs" type="text" value="<?= e($film['Nom_du_film']) ?>" name="Nom_du_film" required> <br>
 
 <label class="form-titre"><b>Date de sortie</b></label>
-<input class="form-champs" type="text" value="<?= e($film['Date_de_sortie']) ?>" name="Date_de_sortie" required> <br>
+<input class="form-champs" type="date" value="<?= e($film['Date_de_sortie']) ?>" name="Date_de_sortie" required> <br>
 
 <label class="form-titre"><b>synopsis</b></label>
 <br>

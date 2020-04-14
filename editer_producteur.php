@@ -10,11 +10,10 @@ $producteurs=$edit->fetch();
 
 if (isset($_POST['bouton'])){
         $Nom = empty($_POST['Nom']) ? null : $_POST['Nom'];
-        $Date_de_naissance = empty($_POST['Date_de_naissance']) ? null : $_POST['Date_de_naissance'];
-        $Pays_d_origine= empty($_POST['Pays_d_origine']) ? null : $_POST['Pays_d_origine'];
+        $Date_de_naissance = empty($_POST['date_de_naissance']) ? null : $_POST['date_de_naissance'];
+        $pays_d_origine= empty($_POST['pays_d_origine']) ? null : $_POST['pays_d_origine'];
         $biographie = empty($_POST['biographie']) ? null : $_POST['biographie'];
-
-        if ($Nom === null || $Date_de_naissance === null  || $Pays_d_origine === null || $biographie === null) {
+        if ($Nom === null || $Date_de_naissance === null  || $pays_d_origine === null || $biographie === null) {
             $erreur = 'Veuillez remplir tous les champs';
         }else {
 
@@ -60,18 +59,18 @@ if (isset($_POST['bouton'])){
 
             $modifier_producteur = $dbh->prepare ("UPDATE Producteur SET 
             Nom = :Nom, 
-            Date_de_naissance = :Date_de_naissance,
-            Pays_d_origine = :Pays_d_origine,
+            date_de_naissance = :Date_de_naissance,
+            pays_d_origine = :pays_d_origine,
             biographie = :biographie WHERE ID_producteur = :ID" );
             $modifier_producteur->bindValue(':ID', $_GET['ID']);
             $modifier_producteur->bindValue(':Nom', $Nom);
             $modifier_producteur->bindValue(':Date_de_naissance', $Date_de_naissance);
-            $modifier_producteur->bindValue(':Pays_d_origine', $Pays_d_origine);
+            $modifier_producteur->bindValue(':pays_d_origine', $pays_d_origine);
             $modifier_producteur->bindValue(':biographie', $biographie);
             $modifier_producteur->execute();
 
             $_SESSION['flash'] = "Modification effectuer";
-            header('Location: editer_producteur.php?ID='.$producteurs['ID']);
+            header('Location: editer_producteur.php?ID='.$producteurs['ID_producteur']);
             die;
         }
     }
@@ -95,8 +94,8 @@ if (isset($_POST['bouton'])){
 <input class="form-champs" type="text" value="<?= e($producteurs['Nom']) ?>" name="Nom" required> <br>
 
 <label class="form-titre"><b>Date de naissance</b></label>
-<input class="form-champs" type="text" value="<?= e($producteurs['date_de_naissance']) ?>" name="date_de_naissance" required> <br>
-
+<input class="form-champs" type="date" value="<?= e($producteurs['date_de_naissance']) ?>" name="date_de_naissance" > <br>
+ 
 <label class="form-titre"><b>Pays_d_origine<b></label>
 <input class="form-champs" type="text" value="<?= e($producteurs['pays_d_origine']) ?>" name="pays_d_origine" required> <br>
 

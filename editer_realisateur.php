@@ -11,10 +11,10 @@ $realisateurs=$edit->fetch();
 if (isset($_POST['bouton'])){
         $Nom = empty($_POST['Nom']) ? null : $_POST['Nom'];
         $Date_de_naissance = empty($_POST['Date_de_naissance']) ? null : $_POST['Date_de_naissance'];
-        $Pays_d_origine= empty($_POST['Pays_d_origine']) ? null : $_POST['Pays_d_origine'];
+        $pays_d_origine= empty($_POST['pays_d_origine']) ? null : $_POST['pays_d_origine'];
         $biographie = empty($_POST['biographie']) ? null : $_POST['biographie'];
 
-        if ($Nom === null || $Date_de_naissance === null  || $Pays_d_origine === null || $biographie === null) {
+        if ($Nom === null || $Date_de_naissance === null  || $pays_d_origine === null || $biographie === null) {
             $erreur = 'Veuillez remplir tous les champs';
         }else {
 
@@ -61,17 +61,17 @@ if (isset($_POST['bouton'])){
             $modifier_realisateur = $dbh->prepare ("UPDATE Realisateur SET 
             Nom = :Nom, 
             Date_de_naissance = :Date_de_naissance,
-            Pays_d_origine = :Pays_d_origine,
+            pays_d_origine = :pays_d_origine,
             biographie = :biographie WHERE ID_realisateur = :ID" );
             $modifier_realisateur->bindValue(':ID', $_GET['ID']);
             $modifier_realisateur->bindValue(':Nom', $Nom);
             $modifier_realisateur->bindValue(':Date_de_naissance', $Date_de_naissance);
-            $modifier_realisateur->bindValue(':Pays_d_origine', $Pays_d_origine);
+            $modifier_realisateur->bindValue(':pays_d_origine', $pays_d_origine);
             $modifier_realisateur->bindValue(':biographie', $biographie);
             $modifier_realisateur->execute();
 
             $_SESSION['flash'] = "Modification effectuer";
-            header('Location: editer_realisateur.php?ID='.$realisateurs['ID']);
+            header('Location: editer_realisateur.php?ID='.$realisateurs['ID_realisateur']);
             die;
         }
     }
@@ -95,7 +95,7 @@ if (isset($_POST['bouton'])){
 <input class="form-champs" type="text" value="<?= e($realisateurs['Nom']) ?>" name="Nom" required> <br>
 
 <label class="form-titre"><b>Date de naissance</b></label>
-<input class="form-champs" type="text" value="<?= e($realisateurs['Date_de_naissance']) ?>" name="Date_de_naissance" required> <br>
+<input class="form-champs" type="date" value="<?= e($realisateurs['Date_de_naissance']) ?>" name="Date_de_naissance" required> <br>
 
 <label class="form-titre"><b>Pays_d_origine<b></label>
 <input class="form-champs" type="text" value="<?= e($realisateurs['pays_d_origine']) ?>" name="pays_d_origine" required> <br>

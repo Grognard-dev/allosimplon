@@ -95,7 +95,7 @@ if (isset($_POST['bouton'])){
 <input class="form-champs" type="text" value="<?= e($acteurs['Nom']) ?>" name="Nom" required> <br>
 
 <label class="form-titre"><b>Date de naissance</b></label>
-<input class="form-champs" type="text" value="<?= e($acteurs['Date_de_naissance']) ?>" name="Date_de_naissance" required> <br>
+<input class="form-champs" type="date" value="<?= e($acteurs['Date_de_naissance']) ?>" name="Date_de_naissance" required> <br>
 
 <label class="form-titre"><b>Pays_d_origine<b></label>
 <input class="form-champs" type="text" value="<?= e($acteurs['Pays_d_origine']) ?>" name="Pays_d_origine" required> <br>

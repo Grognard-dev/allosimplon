@@ -48,59 +48,74 @@ $producteurs_film = $requete_producteurs->fetchAll();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     <title><?= $films['Nom_du_film']?></title>
 </head>
 <body>
-    <h1><?= $films['Nom_du_film']?></h1>
-    <div>
-        <img src="affiche/<?=urlencode($films['Affiche'])?>" alt="">
+    <div class="text-center">
+    <h1 class="shadow .bg-center focus:shadow-outline focus:outline-none text-black font-bold py-2 px-4 rounded m-4 text-5xl "><?= $films['Nom_du_film']?></h1>
     </div>
-    <label><b>Date de sortie<b></label>
-    <div>
-        <p><?=$films['Date_de_sortie']?></p>
+    <div class="flex justify-center">
+        <img class="m-4" src="affiche/<?=urlencode($films['Affiche'])?>" alt="">
     </div>
-     <label><b>Synopsis<b></label>
-    <div>
-        <p><?=$films['synopsis']?></p>
+    <div class="text-center">
+    <label class="shadow .bg-center focus:shadow-outline focus:outline-none text-black font-bold py-2 px-4 rounded m-6 "><b>Date de sortie<b></label>
     </div>
-    <label><b>Genre<b></label>
-     <div>
+    <div class="text-center">
+        <p class="m-4"><?=$films['Date_de_sortie']?></p>
+    </div>
+    <div class="text-center">
+     <label class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Synopsis<b></label>
+     </div>
+    <div class="text-center">
+        <p class="m-4"><?=$films['synopsis']?></p>
+    </div>
+    <div class="text-center">
+    <label class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Genre<b></label>
+    </div>
+     <div class="text-center">
         <?php foreach($genres_film as $genre):?>
-        <ul>
-            <li>
+        <ul class="text-center">
+            <li class="text-center m-4">
             <?=$genre['types']?>
             </li>
         </ul>
         <?php endforeach ?>
     </div>
-    <label><b>Acteurs<b></label>
+    <div class="text-center">
+    <label class="shadow bg-purple-500  focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Acteurs<b></label>
+    </div>
     <br>
-    <div>
+    <div class="flex justify-center">
         <?php foreach($acteurs_film as $acteur):?>
         <ul>
-            <li><img src="photoacteur/<?=urlencode($acteur['photo'])?>" alt="">
+            <li><img  class="m-4  h-64 w-64" src="photoacteur/<?=urlencode($acteur['photo'])?>" alt="">
             <?=$acteur['Nom']?>
             </li>
         </ul>
         <?php endforeach ?>
     </div>
-    <label><b>Réalisateur<b></label>
+    <div class="text-center">
+    <label class="shadow bg-purple-500  focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Réalisateur<b></label>
+    </div>
     <br>
-     <div>
+     <div class="flex justify-center">
         <?php foreach($realisateurs_film as $realisateur):?>
         <ul>
-            <li><img src="photorealisateur/<?=urlencode($realisateur['photo'])?>" alt="">
+            <li><img class="m-4  h-64 w-64" src="photorealisateur/<?=urlencode($realisateur['photo'])?>" alt="">
             <?=$realisateur['Nom']?>
             </li>
         </ul>
         <?php endforeach ?>
     </div>
-    <label><b>Producteur<b></label>
+    <div  class="text-center">
+    <label class="shadow bg-purple-500  focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Producteur<b></label>
+    </div>
     <br>
-     <div>
+     <div class="flex justify-center">
         <?php foreach($producteurs_film as $producteur):?>
         <ul>
-            <li><img src="photoproducteur/<?=urlencode($producteur['photo'])?>" alt="">
+            <li><img  class="m-4 h-64 w-64" src="photoproducteur/<?=urlencode($producteur['photo'])?>" alt="">
             <?=$producteur['Nom']?>
             </li>
         </ul>
@@ -108,6 +123,6 @@ $producteurs_film = $requete_producteurs->fetchAll();
     </div>
    
   
-    <a href="catalogue.php">Retourner a la Gallerie</a>
+    <a class="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4" href="catalogue.php">Retourner a la Gallerie</a>
 </body>
 </html>

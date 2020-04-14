@@ -50,53 +50,56 @@ if(isset($_POST['delete_film'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= e($compte['Nom'])?></title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1><?= $compte['Nom']. ' '. $compte['Prenom']?></h1>
-    
-    <label><b>Nom<b></label>
-    <div>
-        <p><?=e($compte['Nom'])?></p>
+    <div class="text-center">
+    <h1 class="shadow .bg-center focus:shadow-outline focus:outline-none text-black font-bold py-2 px-4 rounded m-4 text-5xl "><?= $compte['Nom']. ' '. $compte['Prenom']?></h1>
     </div>
-     <label><b>Prenom<b></label>
+    <label class="shadow bg-blue-300  focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Nom<b></label>
     <div>
-        <p><?=e($compte['Prenom'])?></p>
+        <p class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4 max-w-titre"><?=e($compte['Nom'])?></p>
     </div>
-    <label><b>Email<b></label>
+     <label class="shadow bg-blue-300  focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Prenom<b></label>
     <div>
-        <p><?=e($compte['Email'])?></p>
+        <p class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4 max-w-titre"><?=e($compte['Prenom'])?></p>
     </div>
-     <label><b>Pseudo<b></label>
+    <label class="shadow bg-blue-300  focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Email<b></label>
     <div>
-        <p><?=e($compte['Pseudo'])?></p>
+        <p class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4 max-w-titre"><?=e($compte['Email'])?></p>
+    </div>
+     <label class="shadow bg-blue-300  focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Pseudo<b></label>
+    <div>
+        <p class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4 max-w-titre"><?=e($compte['Pseudo'])?></p>
     </div>
     <?php foreach($film_favoris as $requete_favori):?>
-            <ul>
-            <li>
+            <ul class=" flex justify-center">
+            <li class="flex  flex-col  text-black-700 text-center bg-green-100 px-2 py-1 w-64 m-2">
              <td><?= $requete_favori['Nom_du_film']?></td>
-            <td><a href="fiche_film.php?ID=<?=$requete_favori['ID_film']?>">Voir</a></td>
+            <td ><a class=" shadow bg-green-400 hover:bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold py-2  px-4 rounded m-2" href="fiche_film.php?ID=<?=$requete_favori['ID_film']?>">Voir</a></td>
             <form method="post">
-                <button type="submit" name="delete_film" value="<?= $requete_favori['ID_film']?>">Delete</button>
+              <td> <button  class="flex-initial shadow bg-green-400 hover:bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold py-2  px-4 rounded m-2" type="submit" name="delete_film" value="<?= $requete_favori['ID_film']?>">Delete</button>
+              </td> 
             </form>
             </li>
             </ul>
             <?php endforeach ?>
             </div>
-             <form method="post">
+             <form class="m-4" method="post">
             <?php $sth = $dbh->prepare("SELECT ID_film,Nom_du_film FROM Film ORDER BY Nom_du_film");
             $sth->execute();
             $tousfilms = $sth->fetchAll();
-            echo "<select name='select_film' >";
+            echo "<select class='block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4'  name='select_film' >";
             foreach($tousfilms as $tousfilm){
                 echo   "<option value=".$tousfilm["ID_film"].">".$tousfilm["Nom_du_film"]."</option>";
             } 
             echo "</select>";
             ?>
-            <div class="bouton">
-            <button type="submit" name="ajout_favoris" class="btn btn-primary mb-2">ajout favoris</button>
+            <div class="bouton ">
+            <button class="flex-initial shadow bg-green-400 hover:bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold py-2  px-4 rounded m-2"   type="submit" name="ajout_favoris" class="btn btn-primary mb-2">ajout favoris</button>
             </div>
             </form>
-    <td><a href="editer_utilisateur.php?ID=<?=$_GET["ID"]?>">modifier mes données</a></td>
-    <a href="https://lefevre.simplon-charleville.fr/allosimplon?ID=<?=$_SESSION["ID"]?>">Retour a l'accueil</a>
+    <td><a class="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"  href="editer_utilisateur.php?ID=<?=$_GET["ID"]?>">modifier mes données</a></td>
+    <a class="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"  href="https://lefevre.simplon-charleville.fr/allosimplon?ID=<?=$_SESSION["ID"]?>">Retour a l'accueil</a>
 </body>
 </html>
