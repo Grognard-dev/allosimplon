@@ -86,27 +86,28 @@ if (isset($_POST['bouton'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editer Acteur</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
     <form method="POST" enctype="multipart/form-data">
 <h1>Modification de l'acteur</h1>
 
-<label class="form-titre"><b>Nom de l'acteur</b></label>
-<input class="form-champs" type="text" value="<?= e($acteurs['Nom']) ?>" name="Nom" required> <br>
+<label class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Nom de l'acteur</b></label>
+<input class="block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4 " type="text" value="<?= e($acteurs['Nom']) ?>" name="Nom" required> <br>
 
-<label class="form-titre"><b>Date de naissance</b></label>
-<input class="form-champs" type="date" value="<?= e($acteurs['Date_de_naissance']) ?>" name="Date_de_naissance" required> <br>
+<label class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Date de naissance</b></label>
+<input class="block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4 " type="date" value="<?= e($acteurs['Date_de_naissance']) ?>" name="Date_de_naissance" required> <br>
 
-<label class="form-titre"><b>Pays_d_origine<b></label>
-<input class="form-champs" type="text" value="<?= e($acteurs['Pays_d_origine']) ?>" name="Pays_d_origine" required> <br>
+<label class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Pays_d_origine<b></label>
+<input class="block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4 " type="text" value="<?= e($acteurs['Pays_d_origine']) ?>" name="Pays_d_origine" required> <br>
  
-<label class="form-titre"><b>biographie</b></label>
+<label class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>biographie</b></label>
 <br>
-<textarea class="form-champs" rows="6" cols="100" class="login"  name="biographie" required><?= e($acteurs['biographie'])?></textarea> <br>
+<textarea class="block appearance-none w-1/2 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4 " rows="6" cols="100" class="login"  name="biographie" required><?= e($acteurs['biographie'])?></textarea> <br>
 
-<label  class="form-titre">><b>Photo</b></label>
+<label  class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4">><b>Photo</b></label>
 <br>
-<img src="photoacteur/<?= urlencode($acteurs['photo'])?>" alt="">
+<img class="m-4 h-64 w-64" src="photoacteur/<?= urlencode($acteurs['photo'])?>" alt="">
 <br>
 <input class="form-champs" type="hidden" name="size" value="250000" />
 <br>
@@ -115,12 +116,12 @@ if (isset($_POST['bouton'])){
 
 
 <div class="bouton">
-<button type="submit" name="bouton" class="btn btn-primary mb-2">modifier</button>
+<button class="shadow bg-purple-300 hover:bg-purple-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4" type="submit" name="bouton" class="btn btn-primary mb-2">modifier</button>
 </div>
 <?php if($erreur != null):?>
   <p><?=e($erreur)?></p>
 <?php endif?>
 </form>
-<a href="liste_acteur.php">Liste des Acteurs</a>
+<a class="shadow bg-purple-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4" href="liste_acteur.php">Liste des Acteurs</a>
 </body>
 </html>

@@ -18,11 +18,11 @@ $films = $liste->fetchAll();
      </td>
     </div>
     <?php endforeach ?>
-    
-    <?php if(isset($_SESSION["is_admin"]) && $_SESSION["is_admin"]):?>
+
+</div>
+<?php if(isset($_SESSION["is_admin"]) && $_SESSION["is_admin"]):?>
     <a class="text-orange-700  text-center bg-black px-4 py-2 m-2" class="ajouter_film" href="insertion_film.php">Ajouter un film</a>
     <?php endif ?>
-</div>
     
 
 
