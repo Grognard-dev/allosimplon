@@ -183,30 +183,31 @@ if(isset($_POST['delete_producteur'])){
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Editer film</title>
 <link rel="stylesheet" href="css/style.css">
+ <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
 <form method="POST" enctype="multipart/form-data">
-<h1>Modification du Film</h1>
+<h1 class="shadow .bg-center focus:shadow-outline focus:outline-none text-black font-bold py-2 px-4 rounded m-4 text-5xl">Modification du Film</h1>
 
-<label class="form-titre"><b>Nom du film</b></label>
-<input class="form-champs" type="text" value="<?= e($film['Nom_du_film']) ?>" name="Nom_du_film" required> <br>
+<label class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Nom du film</b></label>
+<input class="block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4 " type="text" value="<?= e($film['Nom_du_film']) ?>" name="Nom_du_film" required> <br>
 
-<label class="form-titre"><b>Date de sortie</b></label>
-<input class="form-champs" type="date" value="<?= e($film['Date_de_sortie']) ?>" name="Date_de_sortie" required> <br>
+<label class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Date de sortie</b></label>
+<input class="block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4 " type="date" value="<?= e($film['Date_de_sortie']) ?>" name="Date_de_sortie" required> <br>
 
-<label class="form-titre"><b>synopsis</b></label>
+<label class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>synopsis</b></label>
 <br>
-<textarea class="form-champs" rows="6" cols="100" class="login"  name="synopsis" required><?= e($film['synopsis'])?></textarea> <br>
+<textarea class="block appearance-none w-1/2 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4 " rows="6" cols="100" class="login"  name="synopsis" required><?= e($film['synopsis'])?></textarea> <br>
 
 <label><b>Affiche</b></label>
 <br>
-<img src="affiche/<?= urlencode($film['Affiche'])?>" alt="">
+<img  class="m-4 h-64 w-64" src="affiche/<?= urlencode($film['Affiche'])?>" alt="">
 <br>
 <input class="form-champs" type="hidden" name="size" value="250000" />
 <input class="form-champs" type="file" name="Affiche" size=2000 />
 
 <div class="bouton">
-<button type="submit" name="bouton" class="btn btn-primary mb-2">modifier</button>
+<button class="shadow bg-purple-300 hover:bg-purple-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4" type="submit" name="bouton" class="btn btn-primary mb-2">modifier</button>
 </div>
 <?php if($erreur != null):?>
     <p><?=e($erreur)?></p>
@@ -217,7 +218,7 @@ if(isset($_POST['delete_producteur'])){
             <li>
             <?=$genre['types']?>
             <form method="post">
-                <button type="submit" name="delete_genre" value="<?= $genre['ID_genre']?>">Delete</button>
+                <button class="shadow bg-red-300 hover:bg-red-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"  type="submit" name="delete_genre" value="<?= $genre['ID_genre']?>">Delete</button>
             </form>
             </li>
             </ul>
@@ -227,14 +228,14 @@ if(isset($_POST['delete_producteur'])){
             <?php $sth = $dbh->prepare("SELECT ID_genre,types FROM Genre ORDER BY types");
             $sth->execute();
             $tousgenre = $sth->fetchAll();
-            echo "<select name='select_genre' >";
+            echo "<select class='block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4' name='select_genre' >";
             foreach($tousgenre as $genre){
                 echo   "<option value=".$genre["ID_genre"].">".$genre["types"]."</option>";
             } 
             echo "</select>";
             ?>
             <div class="bouton">
-            <button type="submit" name="ajout_genre" class="btn btn-primary mb-2">ajout genre</button>
+            <button class="shadow bg-purple-300 hover:bg-purple-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4" type="submit" name="ajout_genre" class="btn btn-primary mb-2">ajout genre</button>
             </div>
             </form>
             
@@ -242,23 +243,23 @@ if(isset($_POST['delete_producteur'])){
             <?php $sth = $dbh->prepare("SELECT ID_acteur,Nom FROM Acteur ORDER BY Nom");
             $sth->execute();
             $tousacteurs = $sth->fetchAll();
-            echo "<select name='select' >";
+            echo "<select class='block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4' name='select' >";
             foreach($tousacteurs as $acteur){
                 echo   "<option value=".$acteur["ID_acteur"].">".$acteur["Nom"]."</option>";
             } 
             echo "</select>";
             ?>
             <div class="bouton">
-            <button type="submit" name="ajout_acteur" class="btn btn-primary mb-2">ajout acteur</button>
+            <button class="shadow bg-purple-300 hover:bg-purple-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4" type="submit" name="ajout_acteur" class="btn btn-primary mb-2">ajout acteur</button>
             </div>
             </form>
             
         <?php foreach($acteurs_film as $acteur):?>
             <ul>
-            <li><img src="photoacteur/<?=$acteur['photo']?>" alt="">
+            <li><img  class="m-4 h-64 w-64" src="photoacteur/<?=$acteur['photo']?>" alt="">
             <?=$acteur['Nom']?>
             <form method="post">
-                <button type="submit" name="delete" value="<?= $acteur['ID_acteur']?>">Delete</button>
+                <button class="shadow bg-red-300 hover:bg-red-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4" type="submit" name="delete" value="<?= $acteur['ID_acteur']?>">Delete</button>
             </form>
             </li>
             </ul>
@@ -268,23 +269,23 @@ if(isset($_POST['delete_producteur'])){
             <?php $sth = $dbh->prepare("SELECT ID_realisateur,Nom FROM Realisateur ORDER BY Nom");
             $sth->execute();
             $tousrealisateur = $sth->fetchAll();
-            echo "<select name='select_realisateur' >";
+            echo "<select class='block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4' name='select_realisateur' >";
             foreach($tousrealisateur as $realisateur){
                 echo   "<option value=".$realisateur["ID_realisateur"].">".$realisateur["Nom"]."</option>";
             } 
             echo "</select>";
             ?>
             <div class="bouton">
-            <button type="submit" name="ajout_realisateur" class="btn btn-primary mb-2">ajout realisateur</button>
+            <button class="shadow bg-purple-300 hover:bg-purple-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4" type="submit" name="ajout_realisateur" class="btn btn-primary mb-2">ajout realisateur</button>
             </div>
             </form>
             
         <?php foreach($realisateurs_film as $realisateur):?>
             <ul>
-            <li><img src="photorealisateur/<?=$realisateur['photo']?>" alt="">
+            <li><img  class="m-4 h-64 w-64" src="photorealisateur/<?=$realisateur['photo']?>" alt="">
             <?=$realisateur['Nom']?>
             <form method="post">
-                <button type="submit" name="delete_realisateur" value="<?= $realisateur['ID_realisateur']?>">Delete</button>
+                <button class="shadow bg-red-300 hover:bg-red-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4" type="submit" name="delete_realisateur" value="<?= $realisateur['ID_realisateur']?>">Delete</button>
             </form>
             </li>
             </ul>
@@ -294,29 +295,29 @@ if(isset($_POST['delete_producteur'])){
             <?php $sth = $dbh->prepare("SELECT ID_producteur,Nom FROM Producteur ORDER BY Nom");
             $sth->execute();
             $tousproducteurs = $sth->fetchAll();
-            echo "<select name='select_producteur' >";
+            echo "<select class='block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4' name='select_producteur' >";
             foreach($tousproducteurs as $producteur){
                 echo   "<option value=".$producteur["ID_producteur"].">".$producteur["Nom"]."</option>";
             } 
             echo "</select>";
             ?>
             <div class="bouton">
-            <button type="submit" name="ajout_producteur" class="btn btn-primary mb-2">ajout producteur</button>
+            <button class="shadow bg-purple-300 hover:bg-purple-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4" type="submit" name="ajout_producteur" class="btn btn-primary mb-2">ajout producteur</button>
             </div>
             </form>
             
         <?php foreach($producteurs_film as $producteur):?>
             <ul>
-            <li><img src="photoproducteur/<?=$producteur['photo']?>" alt="">
+            <li><img  class="m-4 h-64 w-64" src="photoproducteur/<?=$producteur['photo']?>" alt="">
             <?=$producteur['Nom']?>
             <form method="post">
-                <button type="submit" name="delete_producteur" value="<?= $producteur['ID_producteur']?>">Delete</button>
+                <button class="shadow bg-red-300 hover:bg-red-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4" type="submit" name="delete_producteur" value="<?= $producteur['ID_producteur']?>">Delete</button>
             </form>
             </li>
             </ul>
             <?php endforeach ?>
-            <a href="liste_films.php?ID=<?=$_SESSION['ID']?>">Liste des films</a>
-           <a href="https://lefevre.simplon-charleville.fr/allosimplon/catalogue.php?ID=<?=$_SESSION['ID']?>">Retour a la Gallerie</a>
+            <a class="shadow bg-blue-300 hover:bg-blue-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4" href="liste_films.php?ID=<?=$_SESSION['ID']?>">Liste des films</a>
+           <a class="shadow bg-blue-300 hover:bg-blue-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4" href="https://lefevre.simplon-charleville.fr/allosimplon/catalogue.php?ID=<?=$_SESSION['ID']?>">Retour a la Gallerie</a>
            
             
             </body>

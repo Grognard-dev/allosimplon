@@ -86,38 +86,39 @@ if (isset($_POST['bouton'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editer realisateur</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
     <form method="POST" enctype="multipart/form-data">
-<h1>Modification du realisateur</h1>
+<h1  class="shadow .bg-center focus:shadow-outline focus:outline-none text-black font-bold py-2 px-4 rounded m-4 text-5xl">Modification du realisateur</h1>
 
-<label class="form-titre"><b>Nom du Realisateur</b></label>
-<input class="form-champs" type="text" value="<?= e($realisateurs['Nom']) ?>" name="Nom" required> <br>
+<label class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Nom du Realisateur</b></label>
+<input class="block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4 " type="text" value="<?= e($realisateurs['Nom']) ?>" name="Nom" required> <br>
 
-<label class="form-titre"><b>Date de naissance</b></label>
-<input class="form-champs" type="date" value="<?= e($realisateurs['Date_de_naissance']) ?>" name="Date_de_naissance" required> <br>
+<label class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Date de naissance</b></label>
+<input class="block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4 " type="date" value="<?= e($realisateurs['Date_de_naissance']) ?>" name="Date_de_naissance" required> <br>
 
-<label class="form-titre"><b>Pays_d_origine<b></label>
-<input class="form-champs" type="text" value="<?= e($realisateurs['pays_d_origine']) ?>" name="pays_d_origine" required> <br>
+<label class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>Pays_d_origine<b></label>
+<input class="block appearance-none w-48 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4 " type="text" value="<?= e($realisateurs['pays_d_origine']) ?>" name="pays_d_origine" required> <br>
 
-<label class="form-titre"><b>biographie</b></label>
+<label class="shadow text-gray-900 border-gray-900 .bg-center focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4"><b>biographie</b></label>
 <br>
-<textarea class="form-champs" rows="6" cols="100" class="login"  name="biographie" required><?= e($realisateurs['biographie'])?></textarea> <br>
+<textarea class="block appearance-none w-1/2 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline m-4 " rows="6" cols="100" class="login"  name="biographie" required><?= e($realisateurs['biographie'])?></textarea> <br>
 
 <label><b>Photo</b></label>
 <br>
-<img src="photorealisateur/<?= urlencode($realisateurs['photo'])?>" alt="">
+<img class="m-4 h-64 w-64" src="photorealisateur/<?= urlencode($realisateurs['photo'])?>" alt="">
 <br>
 <input class="form-champs" type="hidden" name="size" value="250000" />
 <input class="form-champs" type="file" name="photo" size=2000 />
 
 <div class="bouton">
-<button type="submit" name="bouton" class="btn btn-primary mb-2">modifier</button>
+<button class="shadow bg-purple-300 hover:bg-purple-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4" type="submit" name="bouton" class="btn btn-primary mb-2">modifier</button>
 </div>
 <?php if($erreur != null):?>
   <p><?=e($erreur)?></p>
 <?php endif?>
 </form>
-<a href="liste_realisateur.php">Liste des Realisateurs</a>
+<a class="shadow bg-purple-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4" href="liste_realisateur.php">Liste des Realisateurs</a>
 </body>
 </html>

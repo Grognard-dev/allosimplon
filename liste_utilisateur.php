@@ -23,26 +23,28 @@ if(isset($_POST['delete_user'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>User</h1>
-    <table>
-        <tr>
-            <th>
+    <h1 class="shadow bg-center focus:shadow-outline focus:outline-none text-black font-bold py-2 px-4 rounded m-4 text-5xl">User</h1>
+    <table class="flex justify-center flex-wrap">
+        <tr class="flex">
+            <th class="flex-initial text-black-700 text-center bg-yellow-200 px-4 py-2 m-2">
                 ID
             </th>
-            <th>
+            <th class="flex-initial text-black-700 text-center bg-purple-200 px-4 py-2 m-2">
                 Nom
             </th>
         </tr>
 <?php foreach($utilisateurs as $utilisateur):?>
 <tr>
-    <td><?= e($utilisateur['ID_utilisateur'])?></td>
-    <td><?= e($utilisateur['Nom'])?></td>
-    <td><a href="editer_utilisateur.php?ID=<?=urlencode($utilisateur['ID_utilisateur'])?>">modifier</a></td>
+    <td class="flex-initial flex-col text-black-700 text-center bg-yellow-200 px-2 py-1 m-2"><?= e($utilisateur['ID_utilisateur'])?></td>
+    <td class="flex-initial flex-col text-black-700 text-center bg-purple-200 px-2 py-1 m-2"><?= e($utilisateur['Nom'])?></td>
+    <td class="flex-initial text-black-700 text-center  px-4 py-2 m-2">
+        <a class="shadow bg-green-400 hover:bg-green-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4" href="editer_utilisateur.php?ID=<?=urlencode($utilisateur['ID_utilisateur'])?>">modifier</a></td>
     <td>
      <form method="post">
-                <button type="submit" name="delete_user" value="<?= e($utilisateur['ID_utilisateur'])?>">Delete user</button>
+                <button class=" flex shadow bg-red-400 hover:bg-red-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4" type="submit" name="delete_user" value="<?= e($utilisateur['ID_utilisateur'])?>">Delete user</button>
             </form>
     </td>
 </tr>
@@ -50,6 +52,6 @@ if(isset($_POST['delete_user'])){
 <?php endforeach ?>
 
     </table>
-    <a href="admin.php?ID=<?=$_SESSION['ID']?>"> Retour liste Admin</a>
+    <a class="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-4" href="admin.php?ID=<?=$_SESSION['ID']?>"> Retour liste Admin</a>
 </body>
 </html>
