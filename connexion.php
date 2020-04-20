@@ -1,5 +1,5 @@
 <?php
-
+require_once "Database.php";
 require "boot.php";
 $dbh = new PDO($config["dsn"], $config["utilisateur"], $config["mdp"]);
 header('Content-type: text/html; charset=utf-8');
@@ -12,8 +12,7 @@ if (isset($_POST['bouton'])){
     if ($pseudo_user === null || $password_user === null) {
         echo 'Veuillez remplir tous les champs';
     }else {
-        $requeteprepare = $dbh->prepare ("SELECT * FROM utilisateur WHERE  Pseudo = :Pseudo") ;
-        $requeteprepare->execute(array(':Pseudo' => $pseudo_user));
+         $requeteprepare = $db->prepareAndExecute('SELECT * FROM utilisateur WHERE Pseudo = :Pseudo',[":Pseudo" => $pseudo_user] );
         $utilisateur = $requeteprepare->fetch(PDO::FETCH_ASSOC);
         if($utilisateur === false){
             $erreur =  "login et / ou mot de passe incorrect";
